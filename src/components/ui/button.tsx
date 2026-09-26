@@ -17,11 +17,11 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         cinema:
-          "border border-gold bg-gold text-ink shadow-cinema hover:bg-gold-bright hover:shadow-gold",
+          "border border-gold bg-gold text-ink hover:bg-gold-bright",
         cinemaOutline:
           "border border-gold/55 bg-transparent text-ivory hover:border-gold hover:bg-gold/10",
         cinemaGhost:
-          "border border-gold/25 bg-ink/45 text-ivory backdrop-blur-md hover:border-gold/60 hover:bg-emerald-deep",
+          "border border-gold/50 bg-emerald-deep text-ivory hover:border-gold hover:bg-emerald",
       },
       size: {
         default: "h-9 px-4 py-2",
@@ -30,7 +30,7 @@ const buttonVariants = cva(
         icon: "h-9 w-9",
         cinema: "h-12 px-6 text-[0.66rem] uppercase tracking-[0.18em] sm:h-14 sm:px-8",
         cinemaLarge: "min-h-14 whitespace-normal px-7 py-4 text-center text-[0.68rem] uppercase tracking-[0.16em] sm:px-10",
-        cinemaIcon: "h-10 min-w-10 px-3 text-[0.58rem] uppercase tracking-[0.12em]",
+        cinemaIcon: "h-11 min-w-11 px-3 text-[0.58rem] uppercase tracking-[0.12em]",
       },
     },
     defaultVariants: {
