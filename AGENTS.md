@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep the invitation as a phone-width, scroll-driven experience with reusable scenes and structured wedding facts; this preserves its physical-invitation feel across devices.
