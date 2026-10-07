@@ -1,10 +1,14 @@
 export const invitation = {
   groom: "Mohammed Ashhad",
   bride: "Lubna Fathima",
-  nikah: { date: "12 December 2026" },
+  nikah: { date: "10 December 2026", iso: "2026-12-10T00:00:00+05:30", day: "10", month: "December", year: "2026" },
   walima: {
-    date: "13 December 2026",
-    day: "Sunday",
+    date: "12 December 2026",
+    iso: "2026-12-12T19:30:00+05:30",
+    dateNumber: "12",
+    month: "December",
+    year: "2026",
+    day: "Saturday",
     time: "7:30 PM",
     venue: "Royal Orchid Grand Ballroom",
     address: "Airport Road, Bengaluru, Karnataka, India",
@@ -17,7 +21,10 @@ export const invitation = {
   },
 } as const;
 
-export const walimaDate = new Date("2026-12-13T19:30:00+05:30");
+export const walimaDate = new Date(invitation.walima.iso);
+export const walimaEndDate = new Date(walimaDate.getTime() + 3.5 * 60 * 60 * 1000);
+export const compactDate = (date: Date) => date.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+export const coupleNames = `${invitation.groom} & ${invitation.bride}`;
 
 export const rsvpMessage =
-  "Assalamu Alaikum! I would love to attend the Walima celebration of Mohammed Ashhad & Lubna Fathima on 13 December 2026. Looking forward to celebrating with you!";
+  `Assalamu Alaikum! I would love to attend the Walima celebration of ${coupleNames} on ${invitation.walima.date}. Looking forward to celebrating with you!`;

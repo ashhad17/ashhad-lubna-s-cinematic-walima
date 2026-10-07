@@ -1,7 +1,7 @@
 import { CalendarPlus, MapPin, Pause, Play, Volume2, VolumeX } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { invitation, walimaDate } from "@/data/invitation";
+import { compactDate, invitation, walimaDate, walimaEndDate } from "@/data/invitation";
 
 const scenes = [
   ["01", "Intro"], ["02", "Beginning"], ["03", "Walima"], ["04", "Celebration"], ["05", "RSVP"],
@@ -65,8 +65,8 @@ export function SoundControl() {
 }
 
 function calendarUrl() {
-  const start = "20261213T140000Z";
-  const end = "20261213T173000Z";
+  const start = compactDate(walimaDate);
+  const end = compactDate(walimaEndDate);
   const params = new URLSearchParams({
     action: "TEMPLATE",
     text: `Walima of ${invitation.groom} & ${invitation.bride}`,
@@ -80,8 +80,8 @@ function calendarUrl() {
 export function downloadCalendar() {
   const contents = [
     "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Walima Invitation//EN", "BEGIN:VEVENT",
-    "UID:ashhad-lubna-walima-20261213@invitation",
-    "DTSTAMP:20260922T000000Z", "DTSTART:20261213T140000Z", "DTEND:20261213T173000Z",
+    `UID:walima-${compactDate(walimaDate)}@invitation`,
+    `DTSTAMP:${compactDate(new Date())}`, `DTSTART:${compactDate(walimaDate)}`, `DTEND:${compactDate(walimaEndDate)}`,
     `SUMMARY:Walima of ${invitation.groom} & ${invitation.bride}`,
     `LOCATION:${invitation.walima.venue}\\, ${invitation.walima.address}`,
     "DESCRIPTION:With the blessings of Allah and our families\\, we invite you to celebrate our Walima.",
