@@ -1,17 +1,18 @@
-import { motion, useMotionValue, useSpring } from "motion/react";
+import { motion, useMotionValue, useReducedMotion, useSpring } from "motion/react";
 import { useEffect, useMemo } from "react";
 
 export function IslamicPattern({ className = "" }: { className?: string }) {
+  const reduced = useReducedMotion();
   return (
-    <svg className={`pattern-draw ${className}`} viewBox="0 0 800 800" aria-hidden="true">
+    <motion.svg className={`pattern-draw ${className}`} viewBox="0 0 800 800" aria-hidden="true" initial={reduced ? false : "hidden"} whileInView="visible" viewport={{ once: true }} variants={{ hidden: {}, visible: { transition: { staggerChildren: .25 } } }}>
       <g fill="none" stroke="currentColor" strokeWidth="0.75">
-        <path d="M400 45 505 155 660 140 645 295 755 400 645 505 660 660 505 645 400 755 295 645 140 660 155 505 45 400 155 295 140 140 295 155Z" />
-        <path d="M400 120 480 210 600 200 590 320 680 400 590 480 600 600 480 590 400 680 320 590 200 600 210 480 120 400 210 320 200 200 320 210Z" />
-        <path d="M400 198 454 272 545 255 528 346 602 400 528 454 545 545 454 528 400 602 346 528 255 545 272 454 198 400 272 346 255 255 346 272Z" />
+        <motion.path variants={{ hidden: { pathLength: 0 }, visible: { pathLength: 1 } }} transition={{ duration: reduced ? 0 : 3.5 }} d="M400 45 505 155 660 140 645 295 755 400 645 505 660 660 505 645 400 755 295 645 140 660 155 505 45 400 155 295 140 140 295 155Z" />
+        <motion.path variants={{ hidden: { pathLength: 0 }, visible: { pathLength: 1 } }} transition={{ duration: reduced ? 0 : 3.5 }} d="M400 120 480 210 600 200 590 320 680 400 590 480 600 600 480 590 400 680 320 590 200 600 210 480 120 400 210 320 200 200 320 210Z" />
+        <motion.path variants={{ hidden: { pathLength: 0 }, visible: { pathLength: 1 } }} transition={{ duration: reduced ? 0 : 3.5 }} d="M400 198 454 272 545 255 528 346 602 400 528 454 545 545 454 528 400 602 346 528 255 545 272 454 198 400 272 346 255 255 346 272Z" />
         <circle cx="400" cy="400" r="120" /><circle cx="400" cy="400" r="205" /><circle cx="400" cy="400" r="282" />
         <path d="M400 45v710M45 400h710M150 150l500 500M650 150 150 650" />
       </g>
-    </svg>
+    </motion.svg>
   );
 }
 
