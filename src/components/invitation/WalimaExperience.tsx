@@ -1,34 +1,115 @@
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ArrowDown, ChevronLeft, ChevronRight, Heart, MapPin, Menu, MessageCircle, X } from "lucide-react";
+import { ArrowDown, MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useReducedMotion } from "motion/react";
 import attire from "@/assets/walima-attire.jpg";
-import ballroom from "@/assets/walima-ballroom.jpg";
 import rings from "@/assets/walima-rings.jpg";
 import silhouette from "@/assets/walima-silhouette.jpg";
+import ballroom from "@/assets/walima-ballroom.jpg";
 import { Button } from "@/components/ui/button";
-import { invitation, rsvpMessage, walimaDate } from "@/data/invitation";
-import { CalendarActions, LocationButton, SoundControl } from "./Controls";
+import { coupleNames, invitation, walimaDate } from "@/data/invitation";
+import { LocationButton } from "./Controls";
 import { IslamicPattern } from "./Atmosphere";
-import { Appear, CameraImage, CelebrationTransition, InvitationMotionContext, ReadingProgress, TitleBeat, TitleSequence } from "./CinematicMotion";
+import { Appear, CameraImage, InvitationMotionContext, ReadingProgress, TitleBeat, TitleSequence } from "./CinematicMotion";
+import { ScratchReveal } from "./ScratchReveal";
 
-const images = [
-  { src: silhouette, alt: "A couple beneath an Islamic arch", caption: "A beautiful beginning" },
-  { src: attire, alt: "Wedding attire and jasmine flowers", caption: "The details of our day" },
-  { src: rings, alt: "Wedding rings on emerald velvet", caption: "A promise to cherish" },
-  { src: ballroom, alt: "Grand ballroom with Islamic arches", caption: "A place to celebrate" },
-];
-const chapters = [
-  ["invitation", "Invitation"], ["story", "Our story"], ["date", "The date"],
-  ["ceremony", "Nikah"], ["walima", "Walima"], ["gallery", "Gallery"], ["rsvp", "RSVP"],
-];
+export type InvitationLanguage = "en" | "ur";
 
-function Bloom({ light = false }: { light?: boolean }) {
-  return <span className={`bloom ${light ? "bloom-light" : ""}`} aria-hidden="true">✦</span>;
+const copy = {
+  en: {
+    specialInvitation: "A special invitation",
+    blessings: "With the blessings of Allah",
+    openInvitation: "Open invitation",
+    nikah: "The Nikah",
+    littleSurprise: "A little surprise, with love",
+    scratchTitle: "Scratch to reveal",
+    scratchIntro: "A little heart holds the details of the day we celebrate our love.",
+    invited: "You’re invited to celebrate the Walima of",
+    scratchHint: "Scratch here to uncover",
+    scratchStatus: "Scratch the heart to reveal the invitation, or use the button below.",
+    revealedStatus: "Your Walima invitation is revealed.",
+    revealButton: "Reveal with love",
+    untilCelebrate: "Until we celebrate",
+    countdownTitle: "Counting down to our Walima",
+    countdownUnits: ["Days", "Hours", "Minutes", "Seconds"],
+    today: "Today is the day. Alhamdulillah.",
+    love: "With all our love",
+    rsvpTitle: "Join us as our forever begins.",
+    rsvpMessage: "Your presence, prayers and blessings would make our celebration complete.",
+    rsvpButton: "RSVP on WhatsApp",
+    location: "Open location",
+    date: (day: string, month: string, year: string) => `${day} · ${month} · ${year}`,
+    walimaDate: (day: string, month: string, year: string) => `${day} ${month} ${year}`,
+    walimaTime: (day: string, time: string) => `${day} · ${time}`,
+    whatsapp: (names: string, date: string) => `Assalamu Alaikum! I would love to attend the Walima celebration of ${names} on ${date}. Looking forward to celebrating with you!`,
+  },
+  ur: {
+    specialInvitation: "خصوصی دعوت نامہ",
+    blessings: "اللہ کے فضل و کرم سے",
+    openInvitation: "دعوت نامہ کھولیں",
+    nikah: "نکاح",
+    littleSurprise: "محبت بھرا ایک چھوٹا سا تحفہ",
+    scratchTitle: "دل کو کھرچ کر دعوت دیکھیے",
+    scratchIntro: "ہمارے جشن کی تفصیلات جاننے کے لیے دل کو آہستہ سے کھرچیں۔",
+    invited: "آپ کو ولیمہ میں شرکت کی دعوت ہے",
+    scratchHint: "دعوت دیکھنے کے لیے یہاں کھرچیں",
+    scratchStatus: "دعوت دیکھنے کے لیے دل کو کھرچیں یا نیچے بٹن دبائیں۔",
+    revealedStatus: "آپ کے ولیمے کی دعوت ظاہر ہو گئی ہے۔",
+    revealButton: "محبت سے دعوت دیکھیے",
+    untilCelebrate: "جشن تک باقی وقت",
+    countdownTitle: "ولیمے میں باقی وقت",
+    countdownUnits: ["دن", "گھنٹے", "منٹ", "سیکنڈ"],
+    today: "آج خوشی کا دن ہے، الحمدللہ۔",
+    love: "ڈھیروں محبت کے ساتھ",
+    rsvpTitle: "ہماری نئی زندگی کی خوشی میں شریک ہوں۔",
+    rsvpMessage: "آپ کی آمد، دعائیں اور نیک تمنائیں ہماری خوشیوں کو دوبالا کریں گی۔",
+    rsvpButton: "واٹس ایپ پر جواب دیں",
+    location: "مقام دیکھیے",
+    date: (day: string, month: string, year: string) => `${urduDigits(day)} · ${urduMonth(month)} · ${urduDigits(year)}`,
+    walimaDate: (day: string, month: string, year: string) => `${urduDigits(day)} ${urduMonth(month)} ${urduDigits(year)}`,
+    walimaTime: (day: string, time: string) => `${urduDay(day)} · ${urduTime(time)}`,
+    whatsapp: (names: string, date: string) => `السلام علیکم! ${date} کو ${names} کے ولیمے میں شرکت کی تصدیق ہے۔ آپ کی خوشی میں شریک ہونے کی خوشی ہوگی۔`,
+  },
+} as const;
+
+type Language = InvitationLanguage;
+export type InvitationCopy = typeof copy.en;
+
+function urduDigits(value: string) {
+  return value.replace(/\d/g, (digit) => "۰۱۲۳۴۵۶۷۸۹"[Number(digit)] ?? digit);
 }
+
+function urduMonth(month: string) {
+  const months: Record<string, string> = {
+    January: "جنوری", February: "فروری", March: "مارچ", April: "اپریل", May: "مئی", June: "جون",
+    July: "جولائی", August: "اگست", September: "ستمبر", October: "اکتوبر", November: "نومبر", December: "دسمبر",
+  };
+  return months[month] ?? month;
+}
+
+function urduDay(day: string) {
+  const days: Record<string, string> = {
+    Sunday: "اتوار", Monday: "پیر", Tuesday: "منگل", Wednesday: "بدھ",
+    Thursday: "جمعرات", Friday: "جمعہ", Saturday: "ہفتہ",
+  };
+  return days[day] ?? day;
+}
+
+function urduTime(time: string) {
+  const match = /^(\d{1,2}):(\d{2})\s*(AM|PM)$/i.exec(time);
+  if (!match) return time;
+  return `${match[3]?.toUpperCase() === "PM" ? "شام" : "صبح"} ${urduDigits(`${match[1]}:${match[2]}`)}`;
+}
+
+function Bloom() {
+  return <span className="bloom" aria-hidden="true">✦</span>;
+}
+
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return <p className="section-label">{children}</p>;
 }
-function Countdown() {
+
+function Countdown({ language }: { language: Language }) {
+  const text = copy[language];
   const [remaining, setRemaining] = useState<number | null>(null);
   useEffect(() => {
     const update = () => setRemaining(Math.max(0, walimaDate.getTime() - Date.now()));
@@ -37,66 +118,97 @@ function Countdown() {
     return () => window.clearInterval(timer);
   }, []);
   const seconds = Math.floor((remaining ?? 0) / 1000);
-  const values = [Math.floor(seconds / 86400), Math.floor(seconds % 86400 / 3600), Math.floor(seconds % 3600 / 60), seconds % 60];
-  return <section className="paper-section countdown-section" aria-label="Countdown to the Walima"><Appear><Bloom/><SectionLabel>Counting down to forever</SectionLabel><h2>Until we celebrate</h2><div className="countdown-grid">{["Days", "Hours", "Minutes", "Seconds"].map((label, index) => <div key={label}><strong>{remaining === null ? "--" : String(values[index] ?? 0).padStart(2, "0")}</strong><span>{label}</span></div>)}</div>{remaining === 0 && <p>Today is the day. Alhamdulillah.</p>}</Appear></section>;
-}
-function Details({ title, rows }: { title: string; rows: [string, string][] }) {
-  return <div className="event-details"><h2>{title}</h2><dl>{rows.map(([key, value]) => <div key={key}><dt>{key}</dt><dd>{value}</dd></div>)}</dl></div>;
+  const values = [
+    Math.floor(seconds / 86400),
+    Math.floor((seconds % 86400) / 3600),
+    Math.floor((seconds % 3600) / 60),
+    seconds % 60,
+  ];
+
+  return <section id="countdown" className="royal-section cinematic-section countdown-section">
+    <div className="cinematic-backdrop"><CameraImage src={rings} alt=""/></div>
+    <Appear>
+      <Bloom/>
+      <SectionLabel>{text.untilCelebrate}</SectionLabel>
+      <h2>{text.countdownTitle}</h2>
+      <div className="countdown-grid">{text.countdownUnits.map((label, index) => <div key={label}><strong>{remaining === null ? "--" : language === "ur" ? urduDigits(String(values[index] ?? 0).padStart(2, "0")) : String(values[index] ?? 0).padStart(2, "0")}</strong><span>{label}</span></div>)}</div>
+      {remaining === 0 && <p>{text.today}</p>}
+    </Appear>
+  </section>;
 }
 
 export function WalimaExperience() {
   const [opening, setOpening] = useState<"closed" | "opening" | "open">("closed");
-  const [menu, setMenu] = useState(false);
-  const [revealed, setRevealed] = useState(false);
-  const [imageIndex, setImageIndex] = useState<number | null>(null);
+  const [language, setLanguage] = useState<Language>("en");
   const reducedMotion = useReducedMotion();
+  const text: InvitationCopy = copy[language];
+
+  useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
+
   useEffect(() => {
     if (opening !== "opening") return;
-    const timer = window.setTimeout(() => { setOpening("open"); document.getElementById("invitation")?.scrollIntoView({ behavior: reducedMotion ? "instant" : "smooth" }); }, reducedMotion ? 50 : 2100);
+    const timer = window.setTimeout(() => {
+      setOpening("open");
+      document.getElementById("invitation")?.scrollIntoView({ behavior: reducedMotion ? "instant" : "smooth" });
+    }, reducedMotion ? 50 : 2100);
     return () => window.clearTimeout(timer);
   }, [opening, reducedMotion]);
+
   useEffect(() => {
     if (opening === "open") return;
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => { document.body.style.overflow = previous; };
   }, [opening]);
-  useEffect(() => {
-    if (imageIndex === null) return;
-    const keydown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setImageIndex(null);
-      if (event.key === "ArrowLeft") setImageIndex(i => i === null ? null : (i + images.length - 1) % images.length);
-      if (event.key === "ArrowRight") setImageIndex(i => i === null ? null : (i + 1) % images.length);
-    };
-    window.addEventListener("keydown", keydown);
-    return () => window.removeEventListener("keydown", keydown);
-  }, [imageIndex]);
-  const whatsapp = `https://wa.me/${invitation.rsvp.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(rsvpMessage)}`;
-  const selectedImage = imageIndex === null ? null : images[imageIndex];
-  return <InvitationMotionContext.Provider value={opening === "open"}><main className="invitation-page">
+
+  const localizedRsvp = text.whatsapp(coupleNames, text.walimaDate(invitation.walima.dateNumber, invitation.walima.month, invitation.walima.year));
+  const whatsapp = `https://wa.me/${invitation.rsvp.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(localizedRsvp)}`;
+
+  return <InvitationMotionContext.Provider value={opening === "open"}><main lang={language} dir={language === "ur" ? "rtl" : "ltr"} className={`invitation-page ${language === "ur" ? "invitation-urdu" : ""}`}>
+    {/* <div className={`language-switch ${opening === "open" ? "language-switch-open" : ""}`} role="group" aria-label={language === "ur" ? "زبان منتخب کریں" : "Choose invitation language"}>
+      <button type="button" lang="en" aria-pressed={language === "en"} onClick={() => setLanguage("en")}>English</button>
+      <button type="button" lang="ur" aria-pressed={language === "ur"} onClick={() => setLanguage("ur")}>اردو</button>
+    </div> */}
     {opening === "open" && <ReadingProgress/>}
     {opening !== "open" && <div className={`cover-screen ${opening === "opening" ? "cover-opening" : ""}`}>
       <div className="cover-leaf cover-leaf-left"/><div className="cover-leaf cover-leaf-right"/><div className="cover-seam" aria-hidden="true"/><div className="cover-sparkles" aria-hidden="true">{Array.from({length: 8}, (_, i) => <i key={i}/>)}</div>
-      <div className="cover-content"><p className="cover-top">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p><div className="cover-medallion"><IslamicPattern/><div><span className="cover-kicker">The Nikah & Walima of</span><strong>{invitation.groom.split(" ")[0]}<br/>{invitation.groom.split(" ").slice(1).join(" ")}</strong><em>&</em><strong>{invitation.bride.split(" ")[0]}<br/>{invitation.bride.split(" ").slice(1).join(" ")}</strong></div></div><p className="cover-foot">With the blessings of Allah</p></div>
-      <Button variant="cinemaOutline" size="cinema" className="open-invitation" disabled={opening === "opening"} onClick={() => { if (opening === "closed") setOpening("opening"); }}>Open invitation <ArrowDown size={15}/></Button>
+      <div className="cover-content"><p className="cover-top" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p><div className="cover-medallion"><IslamicPattern/><div className="cover-seal"><span className="cover-seal-mark" aria-hidden="true">♥</span><span className="cover-kicker">{text.specialInvitation}</span><span className="cover-seal-arabic" lang="ar" dir="rtl">دعوة</span></div></div><p className="cover-foot">{text.blessings}</p></div>
+      <Button variant="cinemaOutline" size="cinema" className="open-invitation" disabled={opening === "opening"} onClick={() => { if (opening === "closed") setOpening("opening"); }}>{text.openInvitation} <ArrowDown size={15}/></Button>
     </div>}
-    {opening === "open" && <><Button variant="cinemaGhost" size="cinemaIcon" className="mobile-menu" aria-label={menu ? "Close navigation" : "Open navigation"} onClick={() => setMenu(!menu)}>{menu ? <X/> : <Menu/>}</Button><SoundControl/><AnimatePresence>{menu && <motion.nav initial={{ x: "100%", opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: "100%", opacity: 0 }} transition={{ duration: reducedMotion ? 0 : .5, ease: [.16, 1, .3, 1] }} className="chapter-menu" aria-label="Invitation chapters">{chapters.map(([id, label]) => <a key={id} href={`#${id}`} onClick={() => setMenu(false)}>{label}</a>)}</motion.nav>}</AnimatePresence></>}
-    <section id="invitation" className="paper-section hero-section"><div className="frame-corner frame-top"/><div className="frame-corner frame-bottom"/><TitleSequence className="hero-inner"><TitleBeat><Bloom/></TitleBeat><TitleBeat><p className="arabic-intro" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p><SectionLabel>With the blessings of Allah</SectionLabel></TitleBeat><h1><TitleBeat><span>{invitation.groom}</span></TitleBeat><TitleBeat><em>&</em></TitleBeat><TitleBeat><span>{invitation.bride}</span></TitleBeat></h1><TitleBeat><div className="hero-divider"/><p className="hero-event">The Nikah</p><p className="hero-date">{invitation.nikah.day} · 12 · {invitation.nikah.year}</p></TitleBeat></TitleSequence><a className="next-cue" href="#message" aria-label="Continue to invitation message"><ArrowDown size={18}/></a></section>
-    <section id="message" className="paper-section message-section"><Appear><Bloom/><SectionLabel>A heartfelt invitation</SectionLabel><h2>Two hearts, one beautiful beginning.</h2><p>By the grace of Allah, and with the blessings of our families, we invite you to share in the joy of our Nikah and celebrate the beginning of our life together.</p><span className="ornament-rule"/></Appear></section>
-    <section className="ornament-section" aria-label="Islamic ornament"><IslamicPattern/><Appear><p lang="ar" dir="rtl">{invitation.verse.arabic}</p><span>“{invitation.verse.english}”</span><small>{invitation.verse.reference}</small></Appear></section>
-    <section id="story" className="paper-section story-section"><Appear><SectionLabel>Our story</SectionLabel><h2>A beautiful beginning</h2></Appear><Appear className="story-image"><CameraImage src={silhouette} alt="A couple walking beneath an Islamic arch"/></Appear><Appear className="story-copy"><Bloom/><p>On {invitation.nikah.date}, by the grace of Allah, two lives become one.</p></Appear><Appear className="story-image story-image-second"><CameraImage src={rings} alt="Wedding rings on emerald velvet"/></Appear><Appear className="story-copy"><p>On {invitation.walima.date}, we gather with those we love to celebrate.</p></Appear></section>
-    <CelebrationTransition/>
-    <section id="date" className="royal-section save-section"><Appear><SectionLabel>Save the date</SectionLabel><Button variant="cinemaGhost" size="cinemaIcon" className={`heart-control ${revealed ? "heart-open" : ""}`} aria-label="Reveal the celebration date" aria-expanded={revealed} onClick={() => setRevealed(!revealed)}><Heart strokeWidth={1}/></Button><div className={`save-date ${revealed ? "is-revealed" : ""}`}><strong>{invitation.walima.dateNumber}</strong><span>{invitation.walima.month}</span><small>{invitation.walima.year} · {invitation.walima.day}</small></div><p className="save-caption">The Walima celebration</p><CalendarActions/></Appear></section>
-    <Countdown/>
-    <section id="ceremony" className="paper-section ceremony-section"><Appear><Bloom/><SectionLabel>The first chapter</SectionLabel><Details title="Nikah ceremony" rows={[["Date", invitation.nikah.date], ["The moment", "Our Nikah"]]}/><p className="detail-note">Details for the ceremony are yet to be shared.</p></Appear></section>
-    <section id="venue" className="venue-section"><Appear><CameraImage src={ballroom} alt="Elegant ballroom with Islamic arches"/><div className="venue-content"><SectionLabel>The celebration awaits</SectionLabel><h2>{invitation.walima.venue}</h2><p>{invitation.walima.address}</p><LocationButton/></div></Appear></section>
-    <section id="walima" className="royal-section walima-section"><IslamicPattern/><Appear><Bloom light/><SectionLabel>The second chapter</SectionLabel><h2>Walima</h2><p className="walima-intro">With joy, we invite you to celebrate with us.</p><Details title="Together in celebration" rows={[["Date", invitation.walima.date], ["Time", invitation.walima.time], ["Venue", invitation.walima.venue]]}/></Appear></section>
-    <section className="paper-section schedule-section"><Appear><SectionLabel>Our celebrations</SectionLabel><h2>A journey together</h2></Appear><div className="schedule-timeline">{[[`${invitation.nikah.day} Dec`, "Nikah", "A new beginning"], [`${invitation.walima.dateNumber} Dec`, "Walima", "An evening of celebration"], ["Forever", "Our next chapter", "With your prayers & blessings"]].map(([date, title, description]) => <Appear key={title} className="schedule-item"><span>{date}</span><h3>{title}</h3><p>{description}</p></Appear>)}</div></section>
-    <section id="gallery" className="paper-section gallery-section"><Appear><SectionLabel>Little moments, lasting memories</SectionLabel><h2>In every detail</h2></Appear><div className="gallery-flow">{images.map((image, index) => <Appear key={image.src} className={`gallery-image gallery-image-${index}`}><Button variant="cinemaGhost" size="cinemaIcon" className="gallery-tap" aria-label={`View image ${index + 1}: ${image.caption}`} onClick={() => setImageIndex(index)}><CameraImage src={image.src} alt={image.alt}/></Button><p>0{index + 1} <span>{image.caption}</span></p></Appear>)}</div></section>
-    <section className="paper-section practical-section"><Appear><Bloom/><SectionLabel>With care</SectionLabel><h2>For our guests</h2><div className="practical-line"><MapPin size={20}/><div><h3>Getting there</h3><p>{invitation.walima.venue}, {invitation.walima.address}.</p><p>Parking and transport details will be shared closer to the celebration.</p></div></div></Appear></section>
-    <section className="paper-section blessing-section"><Appear><Bloom/><SectionLabel>Your presence is a gift</SectionLabel><h2>Your prayers mean the world to us.</h2><p>We ask only for your duas and blessings as we begin this new chapter together.</p></Appear></section>
-    <section id="rsvp" className="royal-section rsvp-section"><Appear><Bloom light/><SectionLabel>Celebrate with us</SectionLabel><h2>We would love to have you there.</h2><p>Your presence, prayers and blessings would make our evening even more meaningful.</p><Button variant="cinema" size="cinemaLarge" asChild><a href={whatsapp} target="_blank" rel="noreferrer"><MessageCircle/> RSVP on WhatsApp</a></Button></Appear></section>
-    <section className="royal-section final-section"><IslamicPattern/><Appear><p className="final-arabic" lang="ar" dir="rtl">الحمد لله</p><SectionLabel>With love and gratitude</SectionLabel><h2>{invitation.groom} <em>&</em> {invitation.bride}</h2><p>May Allah bless this union and fill it with love, mercy and peace.</p><span className="ornament-rule"/><small>{invitation.walima.dateNumber} · 12 · {invitation.walima.year}</small></Appear></section>
-    <AnimatePresence>{imageIndex !== null && selectedImage && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: reducedMotion ? 0 : .35 }} className="gallery-viewer" role="dialog" aria-modal="true" aria-label="Photo gallery" onTouchStart={e => { if (e.touches[0]) e.currentTarget.dataset['touchX'] = String(e.touches[0].clientX); }} onTouchEnd={e => { const touch = e.changedTouches[0]; if (!touch) return; const start = Number(e.currentTarget.dataset['touchX']); const difference = touch.clientX - start; if (Math.abs(difference) > 55) setImageIndex((imageIndex + (difference < 0 ? 1 : images.length - 1)) % images.length); }}><Button variant="cinemaGhost" size="cinemaIcon" className="viewer-close" aria-label="Close gallery" onClick={() => setImageIndex(null)}><X/></Button><Button variant="cinemaGhost" size="cinemaIcon" className="viewer-prev" aria-label="Previous photo" onClick={() => setImageIndex((imageIndex + images.length - 1) % images.length)}><ChevronLeft/></Button><motion.img key={selectedImage.src} initial={reducedMotion ? false : { opacity: 0, scale: .96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: .5 }} src={selectedImage.src} alt={selectedImage.alt}/><Button variant="cinemaGhost" size="cinemaIcon" className="viewer-next" aria-label="Next photo" onClick={() => setImageIndex((imageIndex + 1) % images.length)}><ChevronRight/></Button><p>{selectedImage.caption} · {imageIndex + 1} / {images.length}</p></motion.div>}</AnimatePresence>
+    <section id="invitation" className="paper-section hero-section cinematic-section">
+      <div className="cinematic-backdrop"><CameraImage src={silhouette} alt=""/></div>
+      <div className="frame-corner frame-top"/><div className="frame-corner frame-bottom"/>
+      <TitleSequence className="hero-inner"><TitleBeat><Bloom/></TitleBeat><TitleBeat><p className="arabic-intro" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p><SectionLabel>{text.blessings}</SectionLabel></TitleBeat><h1><TitleBeat><span lang="en" dir="ltr">{invitation.groom}</span></TitleBeat><TitleBeat><em>&</em></TitleBeat><TitleBeat><span lang="en" dir="ltr">{invitation.bride}</span></TitleBeat></h1><TitleBeat><div className="hero-divider"/><p className="hero-event">{text.nikah}</p><p className="hero-date">{text.date(invitation.nikah.day, invitation.nikah.month, invitation.nikah.year)}</p></TitleBeat></TitleSequence>
+      <a className="next-cue" href="#walima" aria-label={language === "ur" ? "ولیمے کی دعوت جاری رکھیں" : "Continue to the Walima invitation"}><ArrowDown size={18}/></a>
+    </section>
+    <section id="walima" className="paper-section scratch-section cinematic-section">
+      <div className="cinematic-backdrop"><CameraImage src={ballroom} alt=""/></div>
+      <Appear>
+        <Bloom/>
+        <SectionLabel>{text.littleSurprise}</SectionLabel>
+        <h2>{text.scratchTitle}</h2>
+        <p className="scratch-intro">{text.scratchIntro}</p>
+        <ScratchReveal language={language} text={text}>
+          <p className="scratch-kicker">{text.invited}</p>
+          <p className="scratch-names" lang="en" dir="ltr">{coupleNames}</p>
+          <span className="scratch-rule" aria-hidden="true">✦</span>
+          <strong className="scratch-date">{language === "ur" ? urduDigits(invitation.walima.dateNumber) : invitation.walima.dateNumber}</strong>
+          <span className="scratch-month">{text.walimaDate("", invitation.walima.month, invitation.walima.year).trim()}</span>
+          <span className="scratch-time" dir={language === "ur" ? "rtl" : "ltr"}>{text.walimaTime(invitation.walima.day, invitation.walima.time)}</span>
+          <span className="scratch-venue" lang="en" dir="ltr">{invitation.walima.venue}</span>
+          <span className="scratch-address" lang="en" dir="ltr">{invitation.walima.address}</span>
+        </ScratchReveal>
+        <div className="scratch-actions">
+          <LocationButton label={text.location}/>
+        </div>
+      </Appear>
+    </section>
+      <Countdown language={language}/>
+      <section id="rsvp" className="royal-section rsvp-section cinematic-section">
+      <div className="cinematic-backdrop"><CameraImage src={attire} alt=""/></div>
+      <Appear><Bloom/><SectionLabel>{text.love}</SectionLabel><h2>{text.rsvpTitle}</h2><p>{text.rsvpMessage}</p><Button variant="cinema" size="cinemaLarge" asChild><a href={whatsapp} target="_blank" rel="noreferrer"><MessageCircle/> {text.rsvpButton}</a></Button><p className="rsvp-signoff" lang="en" dir="ltr">{coupleNames}</p></Appear>
+    </section>
   </main></InvitationMotionContext.Provider>;
 }

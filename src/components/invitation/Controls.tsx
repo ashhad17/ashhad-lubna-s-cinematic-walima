@@ -103,9 +103,9 @@ export function CalendarActions() {
   );
 }
 
-export function LocationButton() {
+export function LocationButton({ label = "Open location" }: { label?: string }) {
   const location = encodeURIComponent(`${invitation.walima.venue}, ${invitation.walima.address}`);
-  return <Button asChild variant="cinema" size="cinema"><a href={`https://www.google.com/maps/search/?api=1&query=${location}`} target="_blank" rel="noreferrer"><MapPin /> Open location</a></Button>;
+  return <Button asChild variant="cinema" size="cinema"><a href={`https://www.google.com/maps/search/?api=1&query=${location}`} target="_blank" rel="noreferrer" aria-label={label}><MapPin /> {label}</a></Button>;
 }
 
 export function ScrollCue() {
