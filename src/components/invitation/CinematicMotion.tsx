@@ -26,7 +26,7 @@ export function CameraImage({ src, alt }: { src: string; alt: string }) {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], ["-5%", "5%"]);
   const scale = useTransform(scrollYProgress, [0, 1], [1.16, 1.04]);
-  return <div ref={ref} className="camera-image"><motion.img src={src} alt={alt} loading="lazy" style={reduced ? undefined : { y, scale }}/></div>;
+  return <div ref={ref} className="camera-image"><motion.img src={src} alt={alt} loading="lazy" style={reduced ? {} : { y, scale }}/></div>;
 }
 
 export function CelebrationTransition() {
@@ -37,7 +37,7 @@ export function CelebrationTransition() {
   const firstOpacity = useTransform(scrollYProgress, [0, .15, .4, .55], [0, 1, 1, 0]);
   const secondOpacity = useTransform(scrollYProgress, [.35, .6, 1], [0, 1, 1]);
   const y = useTransform(scrollYProgress, [.35, .8], [35, 0]);
-  return <section ref={ref} className={`film-transition ${reduced ? "film-still" : ""}`} aria-label="From a beautiful beginning to a beautiful celebration"><div className="film-sticky"><motion.p className="section-label" style={reduced ? undefined : { opacity: firstOpacity }}>A beautiful beginning</motion.p><motion.span className="film-line" style={reduced ? undefined : { scaleX: lineScale }}/><motion.h2 style={reduced ? undefined : { opacity: secondOpacity, y }}>And now,<br/><em>we celebrate.</em></motion.h2><span className="film-diamond" aria-hidden="true">✦</span></div></section>;
+  return <section ref={ref} className={`film-transition ${reduced ? "film-still" : ""}`} aria-label="From a beautiful beginning to a beautiful celebration"><div className="film-sticky"><motion.p className="section-label" style={reduced ? {} : { opacity: firstOpacity }}>A beautiful beginning</motion.p><motion.span className="film-line" style={reduced ? {} : { scaleX: lineScale }}/><motion.h2 style={reduced ? {} : { opacity: secondOpacity, y }}>And now,<br/><em>we celebrate.</em></motion.h2><span className="film-diamond" aria-hidden="true">✦</span></div></section>;
 }
 
 export function ReadingProgress() {
