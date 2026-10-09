@@ -29,6 +29,23 @@ export function CameraImage({ src, alt }: { src: string; alt: string }) {
   return <div ref={ref} className="camera-image"><motion.img src={src} alt={alt} loading="lazy" style={reduced ? {} : { y, scale }}/></div>;
 }
 
+export function CelebrationReveal({ src, title }: { src: string; title: string }) {
+  const ref = useRef<HTMLElement>(null);
+  const reduced = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+  const aperture = useTransform(scrollYProgress, [0, .7], ["inset(18% 20% 18% 20% round 180px 180px 0 0)", "inset(0% 0% 0% 0% round 0px 0px 0 0)"]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1.22, 1]);
+  const y = useTransform(scrollYProgress, [0, .8], [30, -16]);
+  const titleScale = useTransform(scrollYProgress, [0, .8], [.88, 1]);
+  const lineScale = useTransform(scrollYProgress, [0, .65], [.08, 1]);
+  return <section ref={ref} className={`celebration-reveal ${reduced ? "celebration-still" : ""}`} aria-label={title}>
+    <div className="celebration-sticky">
+      <motion.div className="celebration-aperture" style={reduced ? {} : { clipPath: aperture }}><motion.img src={src} alt="" loading="lazy" style={reduced ? {} : { scale }}/></motion.div>
+      <div className="celebration-title"><span className="celebration-ornament" aria-hidden="true">✦</span><motion.span className="celebration-line" style={reduced ? {} : { scaleX: lineScale }}/><motion.h2 style={reduced ? {} : { y, scale: titleScale }}>{title}</motion.h2><motion.span className="celebration-line" style={reduced ? {} : { scaleX: lineScale }}/></div>
+    </div>
+  </section>;
+}
+
 export function CelebrationTransition() {
   const ref = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();

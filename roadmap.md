@@ -1,5 +1,8 @@
 # Build roadmap
 
+- [x] Enhance existing scenes with a cinematic Walima reveal, distinct visual rhythm, and a refined heart reveal
+- [x] Verify the enhanced scenes, interactions, and reduced-motion fallback
+
 - [x] Reuse existing wedding imagery
 - [x] Update Nikah to 10 December and Valima to 12 December 2026 throughout
 - [x] Enhance physical opening, scene choreography, photo depth, and cinematic transitions
