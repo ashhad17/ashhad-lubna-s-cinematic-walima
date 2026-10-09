@@ -1,5 +1,9 @@
 # Build roadmap
 
+- [ ] Refine countdown digits and scratch reveal feedback
+- [ ] Add a marked event calendar with calendar-saving actions
+- [ ] Verify dates, scratch completion, calendar controls, and phone layout
+
 - [x] Enhance existing scenes with a cinematic Walima reveal, distinct visual rhythm, and a refined heart reveal
 - [x] Verify the enhanced scenes, interactions, and reduced-motion fallback
 
