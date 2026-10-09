@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from "react";
 import type { InvitationCopy, InvitationLanguage } from "./WalimaExperience";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { Button } from "@/components/ui/button";
 
 type Point = { x: number; y: number };
 
@@ -50,6 +52,7 @@ export function ScratchReveal({ children, language, text }: { children: ReactNod
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const previousPoint = useRef<Point | null>(null);
   const [revealed, setRevealed] = useState(false);
+  const reduced = useReducedMotion();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -116,7 +119,10 @@ export function ScratchReveal({ children, language, text }: { children: ReactNod
       <div className={`scratch-card ${revealed ? "is-revealed" : ""}`}>
         <div className="scratch-heart">
           <div className="scratch-details">{children}</div>
-          {!revealed && <canvas
+          <AnimatePresence>{!revealed && <motion.canvas
+            key="foil"
+            exit={reduced ? { opacity: 0 } : { opacity: 0, scale: 1.08 }}
+            transition={{ duration: reduced ? 0 : .8, ease: [.16, 1, .3, 1] }}
             ref={canvasRef}
             className="scratch-foil"
             aria-hidden="true"
@@ -127,12 +133,13 @@ export function ScratchReveal({ children, language, text }: { children: ReactNod
             onPointerMove={scratch}
             onPointerUp={finishScratch}
             onPointerCancel={finishScratch}
-          />}
+          />}</AnimatePresence>
           {!revealed && <span className="scratch-hint" aria-hidden="true">{text.scratchHint}</span>}
         </div>
       </div>
+      {revealed && !reduced && <div className="reveal-confetti" aria-hidden="true">{Array.from({ length: 8 }, (_, index) => <i key={index}/>)}</div>}
       <p className="scratch-status" aria-live="polite">{revealed ? text.revealedStatus : text.scratchStatus}</p>
-      {!revealed && <button className="scratch-reveal-button" type="button" onClick={() => setRevealed(true)}>{text.revealButton}</button>}
+      {!revealed && <Button variant="cinemaGhost" className="scratch-reveal-button" type="button" onClick={() => setRevealed(true)}>{text.revealButton}</Button>}
     </div>
   );
 }

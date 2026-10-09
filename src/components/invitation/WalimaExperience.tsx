@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { coupleNames, invitation, walimaDate } from "@/data/invitation";
 import { LocationButton } from "./Controls";
 import { IslamicPattern } from "./Atmosphere";
-import { Appear, CameraImage, InvitationMotionContext, ReadingProgress, TitleBeat, TitleSequence } from "./CinematicMotion";
+import { Appear, CameraImage, CelebrationReveal, InvitationMotionContext, ReadingProgress, TitleBeat, TitleSequence } from "./CinematicMotion";
 import { ScratchReveal } from "./ScratchReveal";
 
 export type InvitationLanguage = "en" | "ur";
@@ -20,6 +20,7 @@ const copy = {
     blessings: "With the blessings of Allah",
     openInvitation: "Open invitation",
     nikah: "The Nikah",
+    walima: "Walima",
     littleSurprise: "A little surprise, with love",
     scratchTitle: "Scratch to reveal",
     scratchIntro: "A little heart holds the details of the day we celebrate our love.",
@@ -47,6 +48,7 @@ const copy = {
     blessings: "اللہ کے فضل و کرم سے",
     openInvitation: "دعوت نامہ کھولیں",
     nikah: "نکاح",
+    walima: "ولیمہ",
     littleSurprise: "محبت بھرا ایک چھوٹا سا تحفہ",
     scratchTitle: "دل کو کھرچ کر دعوت دیکھیے",
     scratchIntro: "ہمارے جشن کی تفصیلات جاننے کے لیے دل کو آہستہ سے کھرچیں۔",
@@ -72,7 +74,7 @@ const copy = {
 } as const;
 
 type Language = InvitationLanguage;
-export type InvitationCopy = typeof copy.en;
+export type InvitationCopy = (typeof copy)[InvitationLanguage];
 
 function urduDigits(value: string) {
   return value.replace(/\d/g, (digit) => "۰۱۲۳۴۵۶۷۸۹"[Number(digit)] ?? digit);
@@ -183,6 +185,7 @@ export function WalimaExperience() {
       <TitleSequence className="hero-inner"><TitleBeat><Bloom/></TitleBeat><TitleBeat><p className="arabic-intro" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p><SectionLabel>{text.blessings}</SectionLabel></TitleBeat><h1><TitleBeat><span lang="en" dir="ltr">{invitation.groom}</span></TitleBeat><TitleBeat><em>&</em></TitleBeat><TitleBeat><span lang="en" dir="ltr">{invitation.bride}</span></TitleBeat></h1><TitleBeat><div className="hero-divider"/><p className="hero-event">{text.nikah}</p><p className="hero-date">{text.date(invitation.nikah.day, invitation.nikah.month, invitation.nikah.year)}</p></TitleBeat></TitleSequence>
       <a className="next-cue" href="#walima" aria-label={language === "ur" ? "ولیمے کی دعوت جاری رکھیں" : "Continue to the Walima invitation"}><ArrowDown size={18}/></a>
     </section>
+    <CelebrationReveal src={ballroom} title={text.walima}/>
     <section id="walima" className="paper-section scratch-section cinematic-section">
       <div className="cinematic-backdrop"><CameraImage src={ballroom} alt=""/></div>
       <Appear>
