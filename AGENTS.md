@@ -12,3 +12,4 @@
 - Keep the invitation as a phone-width, scroll-driven experience with reusable scenes and structured wedding facts; this preserves its physical-invitation feel across devices.
 - Keep scroll choreography in reusable motion primitives with a shared opening-ready context and reduced-motion fallbacks; this prevents hidden-cover reveals and keeps each scene consistent.
 - Derive countdown, calendar exports, RSVP messages, and displayed dates from the structured invitation data; this prevents event-date drift across actions.
+- Build marked calendar days from the date portion of event ISO values in local calendar coordinates; this keeps highlighted dates stable across guest timezones.

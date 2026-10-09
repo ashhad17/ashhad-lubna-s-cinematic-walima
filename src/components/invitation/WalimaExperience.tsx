@@ -11,6 +11,8 @@ import { LocationButton } from "./Controls";
 import { IslamicPattern } from "./Atmosphere";
 import { Appear, CameraImage, CelebrationReveal, InvitationMotionContext, ReadingProgress, TitleBeat, TitleSequence } from "./CinematicMotion";
 import { ScratchReveal } from "./ScratchReveal";
+import { MarkedCalendar } from "./MarkedCalendar";
+import { CountdownDigits } from "./CountdownDigits";
 
 export type InvitationLanguage = "en" | "ur";
 
@@ -133,7 +135,9 @@ function Countdown({ language }: { language: Language }) {
       <Bloom/>
       <SectionLabel>{text.untilCelebrate}</SectionLabel>
       <h2>{text.countdownTitle}</h2>
-      <div className="countdown-grid">{text.countdownUnits.map((label, index) => <div key={label}><strong>{remaining === null ? "--" : language === "ur" ? urduDigits(String(values[index] ?? 0).padStart(2, "0")) : String(values[index] ?? 0).padStart(2, "0")}</strong><span>{label}</span></div>)}</div>
+      <div className="countdown-clock-face" aria-hidden="true"><span>✦</span><i/><span>✦</span></div>
+      <div className="countdown-grid">{text.countdownUnits.map((label, index) => <CountdownDigits key={label} label={label} value={remaining === null ? "--" : language === "ur" ? urduDigits(String(values[index] ?? 0).padStart(2, "0")) : String(values[index] ?? 0).padStart(2, "0")}/>)}</div>
+      <p className="countdown-event-date">{text.walimaDate(invitation.walima.dateNumber, invitation.walima.month, invitation.walima.year)}<span>{text.walimaTime(invitation.walima.day, invitation.walima.time)}</span></p>
       {remaining === 0 && <p>{text.today}</p>}
     </Appear>
   </section>;
@@ -209,6 +213,7 @@ export function WalimaExperience() {
       </Appear>
     </section>
       <Countdown language={language}/>
+      <MarkedCalendar language={language}/>
       <section id="rsvp" className="royal-section rsvp-section cinematic-section">
       <div className="cinematic-backdrop"><CameraImage src={attire} alt=""/></div>
       <Appear><Bloom/><SectionLabel>{text.love}</SectionLabel><h2>{text.rsvpTitle}</h2><p>{text.rsvpMessage}</p><Button variant="cinema" size="cinemaLarge" asChild><a href={whatsapp} target="_blank" rel="noreferrer"><MessageCircle/> {text.rsvpButton}</a></Button><p className="rsvp-signoff" lang="en" dir="ltr">{coupleNames}</p></Appear>

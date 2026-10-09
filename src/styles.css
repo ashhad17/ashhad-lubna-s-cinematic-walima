@@ -358,3 +358,51 @@
 @media (max-width:375px) { .hero-section h1 { font-size:54px; }.celebration-title h2 { font-size:68px; }.countdown-grid strong { font-size:64px; } }
 @media (min-width:700px) { .hero-section h1 { font-size:76px; }.celebration-title h2 { font-size:108px; } }
 @media (prefers-reduced-motion:reduce) { .celebration-reveal { height:80svh; }.celebration-sticky { position:relative; height:100%; }.reveal-confetti,.reading-progress { display:none; } }
+
+/* Engraved timekeeping and an invitation-paper calendar. */
+.countdown-section.cinematic-section { min-height:90svh; }
+.countdown-section h2 { max-width:300px; font-size:44px; margin-bottom:24px; }
+.countdown-clock-face { display:flex; align-items:center; justify-content:center; gap:18px; color:var(--gold-bright); }
+.countdown-clock-face i { display:block; width:100px; height:1px; background:var(--border); }
+.countdown-grid { width:100%; max-width:340px; margin-top:24px; }
+.countdown-grid .countdown-unit { padding:18px 10px 23px; }
+.countdown-grid .countdown-numeral { position:relative; display:flex; justify-content:center; align-items:center; height:90px; overflow:hidden; color:var(--ivory); }
+.countdown-numeral strong { display:block; font-size:80px; line-height:1; }
+.countdown-grid .countdown-unit-label { margin-top:8px; color:var(--gold-bright); font-size:12px; }
+.countdown-section p.countdown-event-date { font:22px/1.4 var(--font-display); color:var(--gold-bright); margin:32px auto 0; }
+.countdown-event-date span { display:block; margin-top:6px; font:12px/1.5 var(--font-sans); color:var(--ivory); }
+.scratch-progress { width:100px; height:2px; background:var(--border); overflow:hidden; margin:12px auto; }
+.scratch-progress span { display:block; height:100%; background:var(--gold-ink); transform-origin:left; }
+.scratch-reveal-button { gap:8px; }
+.scratch-section .scratch-intro { margin-bottom:20px; }
+.scratch-section .scratch-reveal { max-width:430px; }
+.scratch-heart { box-shadow:none; }
+.scratch-hint { font-size:11px; color:var(--rose-ink); }
+.marked-calendar-section { min-height:auto; padding-top:85px; padding-bottom:85px; }
+.marked-calendar-inner { width:100%; max-width:380px; }
+.calendar-heart { margin:auto; color:var(--gold-ink); stroke-width:1.2; }
+.marked-calendar-section h2 { font-size:44px; margin:12px 0 30px; }
+.wedding-calendar-wrap { border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:22px 0 20px; }
+.wedding-calendar { width:100%; padding:0; background:transparent; --cell-size:44px; }
+.wedding-calendar .rdp-months { width:100%; }
+.wedding-calendar .rdp-month_caption { margin-bottom:10px; padding:0; }
+.wedding-calendar .rdp-caption_label { font:500 27px/1.2 var(--font-display); color:var(--ink); }
+.wedding-calendar .rdp-weekday { color:var(--gold-ink); font-size:11px; }
+.wedding-calendar .rdp-week { margin-top:4px; }
+.wedding-calendar .rdp-day button { min-width:0; min-height:44px; font-size:14px; border-radius:50%; }
+.wedding-calendar .rdp-disabled { opacity:.45; }
+.wedding-calendar .rdp-today { background:transparent; color:var(--ink); }
+.wedding-calendar .walima-calendar-day button { border:1px solid var(--gold-ink); color:var(--rose-ink); position:relative; }
+.wedding-calendar .walima-calendar-day button::after { content:"♥"; position:absolute; bottom:1px; font-size:9px; color:inherit; }
+.wedding-calendar .nikah-calendar-day button { border:1px solid var(--border); }
+.wedding-calendar button[data-selected-single=true] { background:var(--royal); color:var(--ivory); box-shadow:0 0 0 3px var(--ivory),0 0 0 4px var(--gold); }
+.calendar-legend { display:flex; justify-content:center; gap:30px; margin:20px 0; font-size:12px; color:var(--gold-ink); }
+.calendar-legend span { display:flex; align-items:center; gap:8px; }
+.nikah-dot { width:7px; height:7px; border:1px solid var(--gold); border-radius:50%; }
+.calendar-event { min-height:85px; margin:26px auto 10px; }
+.calendar-event p { margin:5px 0; font-size:13px!important; color:var(--muted-foreground); }
+.calendar-event p.calendar-event-name { font:500 28px/1.2 var(--font-display)!important; color:var(--ink); }
+.marked-calendar-section .calendar-actions { gap:10px; }
+.marked-calendar-section .calendar-actions>* { width:100%; }
+.marked-calendar-section .calendar-actions button { color:var(--gold-ink); }
+@media (max-width:375px) { .countdown-numeral strong { font-size:68px; }.wedding-calendar .rdp-day button { font-size:13px; } }

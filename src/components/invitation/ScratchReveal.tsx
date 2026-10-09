@@ -30,19 +30,21 @@ function paintFoil(canvas: HTMLCanvasElement) {
   context.clip();
 
   const foil = context.createLinearGradient(0, 0, bounds.width, bounds.height);
-  foil.addColorStop(0, "#bd9955");
-  foil.addColorStop(0.28, "#f0d6d0");
-  foil.addColorStop(0.52, "#b5904f");
-  foil.addColorStop(0.76, "#f2ded5");
-  foil.addColorStop(1, "#ad8848");
+  const tokens = getComputedStyle(document.documentElement);
+  const token = (name: string) => tokens.getPropertyValue(name).trim();
+  foil.addColorStop(0, token("--gold"));
+  foil.addColorStop(0.28, token("--ivory"));
+  foil.addColorStop(0.52, token("--gold-ink"));
+  foil.addColorStop(0.76, token("--gold-bright"));
+  foil.addColorStop(1, token("--gold"));
   context.fillStyle = foil;
   context.fillRect(0, 0, bounds.width, bounds.height);
-  context.strokeStyle = "rgba(255, 250, 232, .44)";
+  context.strokeStyle = token("--ivory");
   context.lineWidth = 1;
   heartPath(context, bounds.width * 0.88, bounds.height * 0.85, bounds.width * 0.06, bounds.height * 0.06);
   context.stroke();
   context.textAlign = "center";
-  context.fillStyle = "#493b26";
+  context.fillStyle = token("--rose-ink");
   context.font = "24px Georgia, serif";
   context.fillText("♥", bounds.width / 2, bounds.height * 0.53);
   context.restore();
@@ -52,12 +54,19 @@ export function ScratchReveal({ children, language, text }: { children: ReactNod
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const previousPoint = useRef<Point | null>(null);
   const [revealed, setRevealed] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const initialPixels = useRef<Uint8ClampedArray | null>(null);
   const reduced = useReducedMotion();
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const redraw = () => paintFoil(canvas);
+    const redraw = () => {
+      paintFoil(canvas);
+      const context = canvas.getContext("2d");
+      if (context && canvas.width && canvas.height) initialPixels.current = context.getImageData(0, 0, canvas.width, canvas.height).data;
+      setProgress(0);
+    };
     redraw();
     window.addEventListener("resize", redraw);
     return () => window.removeEventListener("resize", redraw);
@@ -89,24 +98,23 @@ export function ScratchReveal({ children, language, text }: { children: ReactNod
   const checkReveal = (canvas: HTMLCanvasElement) => {
     const context = canvas.getContext("2d");
     if (!context || !canvas.width || !canvas.height) return;
+    const baseline = initialPixels.current;
+    if (!baseline) return;
     const { data } = context.getImageData(0, 0, canvas.width, canvas.height);
     const stride = 24;
     let transparent = 0;
     let sampled = 0;
     for (let y = 0; y < canvas.height; y += stride) {
       for (let x = 0; x < canvas.width; x += stride) {
-        const normalizedX = x / canvas.width;
-        const normalizedY = y / canvas.height;
-        const inHeart = Math.pow(normalizedX - 0.5, 2) + Math.pow(normalizedY - 0.36, 2) < 0.22
-          || normalizedY > 0.34 && normalizedY < 0.92
-          && normalizedX > 0.5 - (normalizedY - 0.34) * 0.68
-          && normalizedX < 0.5 + (normalizedY - 0.34) * 0.68;
-        if (!inHeart) continue;
+        const alphaIndex = (y * canvas.width + x) * 4 + 3;
+        if ((baseline[alphaIndex] ?? 0) < 200) continue;
         sampled++;
-        if (data[(y * canvas.width + x) * 4 + 3] === 0) transparent++;
+        if ((data[alphaIndex] ?? 255) < 40) transparent++;
       }
     }
-    if (transparent / sampled >= 0.4) setRevealed(true);
+    const completion = sampled ? Math.min(100, Math.round(transparent / sampled / .4 * 100)) : 0;
+    setProgress(completion);
+    if (completion >= 100) setRevealed(true);
   };
 
   const finishScratch = (event: PointerEvent<HTMLCanvasElement>) => {
@@ -139,6 +147,7 @@ export function ScratchReveal({ children, language, text }: { children: ReactNod
       </div>
       {revealed && !reduced && <div className="reveal-confetti" aria-hidden="true">{Array.from({ length: 8 }, (_, index) => <i key={index}/>)}</div>}
       <p className="scratch-status" aria-live="polite">{revealed ? text.revealedStatus : text.scratchStatus}</p>
+      <div className="scratch-progress" role="progressbar" aria-label={language === "ur" ? "دعوت کا انکشاف" : "Invitation reveal"} aria-valuemin={0} aria-valuemax={100} aria-valuenow={revealed ? 100 : progress}><motion.span animate={{ scaleX: revealed ? 1 : progress / 100 }} transition={{ duration: reduced ? 0 : .4 }}/></div>
       {!revealed && <Button variant="cinemaGhost" className="scratch-reveal-button" type="button" onClick={() => setRevealed(true)}>{text.revealButton}</Button>}
     </div>
   );
