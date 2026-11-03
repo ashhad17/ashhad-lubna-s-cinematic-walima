@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from "react";
-import type { InvitationCopy, InvitationLanguage } from "./walimaExperience";
+import type { InvitationCopy, InvitationLanguage } from "./WalimaExperience";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Button } from "@/components/ui/button";
 
@@ -142,6 +142,7 @@ export function ScratchReveal({ children, language, text }: { children: ReactNod
             onPointerUp={finishScratch}
             onPointerCancel={finishScratch}
           />}</AnimatePresence>
+          {!revealed && <span className="scratch-foil-sheen" aria-hidden="true"/>}
           {!revealed && <span className="scratch-hint" aria-hidden="true">{text.scratchHint}</span>}
         </div>
       </div>

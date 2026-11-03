@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { walimaExperience } from "@/components/invitation/walimaExperience";
+import { walimaExperience } from "@/components/invitation/WalimaExperience";
 import { coupleNames, invitation } from "@/data/invitation";
 
 export const Route = createFileRoute("/")({

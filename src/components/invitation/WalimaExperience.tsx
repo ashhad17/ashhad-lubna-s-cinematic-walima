@@ -8,8 +8,8 @@ import ballroom from "@/assets/walima-ballroom.jpg";
 import { Button } from "@/components/ui/button";
 import { coupleNames, invitation, walimaDate } from "@/data/invitation";
 import { LocationButton } from "./Controls";
-import { IslamicPattern } from "./Atmosphere";
-import { Appear, CameraImage, CelebrationReveal, InvitationMotionContext, ReadingProgress, TitleBeat, TitleSequence } from "./CinematicMotion";
+import { IslamicPattern, ParticleField } from "./Atmosphere";
+import { Appear, CameraImage, CelebrationReveal, CharsReveal, GhostWord, InvitationMotionContext, LabelRule, ParallaxRing, ReadingProgress, ScrollSpin, SheenTitle, TitleBeat, TitleSequence } from "./CinematicMotion";
 import { ScratchReveal } from "./ScratchReveal";
 import { MarkedCalendar } from "./MarkedCalendar";
 import { CountdownDigits } from "./CountdownDigits";
@@ -116,6 +116,10 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   return <p className="section-label">{children}</p>;
 }
 
+function RevealTitle({ language, text }: { language: Language; text: string }) {
+  return <h2>{<SheenTitle>{language === "en" ? <CharsReveal text={text}/> : text}</SheenTitle>}</h2>;
+}
+
 function Countdown({ language }: { language: Language }) {
   const text = copy[language];
   const [remaining, setRemaining] = useState<number | null>(null);
@@ -135,6 +139,8 @@ function Countdown({ language }: { language: Language }) {
 
   return <section id="countdown" className="royal-section cinematic-section countdown-section">
     <div className="cinematic-backdrop"><CameraImage src={rings} alt=""/></div>
+    <GhostWord text="FOREVER"/>
+    <ParallaxRing className="countdown-ring"/>
     <Appear>
       <Bloom/>
       <p className="countdown-anticipation">{text.anticipation}</p>
@@ -146,8 +152,8 @@ function Countdown({ language }: { language: Language }) {
         </footer>
       </blockquote>
       <SectionLabel>{text.untilCelebrate}</SectionLabel>
-      <h2>{text.countdownTitle}</h2>
-      <div className="countdown-clock-face" aria-hidden="true"><span>✦</span><i/><span>✦</span></div>
+      <RevealTitle language={language} text={text.countdownTitle}/>
+      <ScrollSpin className="countdown-clock-spin" from={-30} to={30}><div className="countdown-clock-face" aria-hidden="true"><span>✦</span><i/><span>✦</span></div></ScrollSpin>
       <div className="countdown-grid">{text.countdownUnits.map((label, index) => <CountdownDigits key={label} label={label} value={remaining === null ? "--" : language === "ur" ? urduDigits(String(values[index] ?? 0).padStart(2, "0")) : String(values[index] ?? 0).padStart(2, "0")}/>)}</div>
       <p className="countdown-event-date">{text.walimaDate(invitation.walima.dateNumber, invitation.walima.month, invitation.walima.year)}<span>{text.walimaTime(invitation.walima.day, invitation.walima.time)}</span></p>
       {remaining === 0 && <p>{text.today}</p>}
@@ -198,17 +204,22 @@ export function walimaExperience() {
     </div>}
     <section id="invitation" className="paper-section hero-section cinematic-section">
       <div className="cinematic-backdrop"><CameraImage src={silhouette} alt=""/></div>
+      <GhostWord text="دعوة" className="ghost-arabic"/>
+      <ParallaxRing className="hero-ring"/>
+      <ParticleField/>
       <div className="frame-corner frame-top"/><div className="frame-corner frame-bottom"/>
-      <TitleSequence className="hero-inner"><TitleBeat><Bloom/></TitleBeat><TitleBeat><p className="arabic-intro" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p><SectionLabel>{text.blessings}</SectionLabel></TitleBeat><h1><TitleBeat><span lang="en" dir="ltr">{invitation.groom}</span></TitleBeat><TitleBeat><em>&</em></TitleBeat><TitleBeat><span lang="en" dir="ltr">{invitation.bride}</span></TitleBeat></h1><TitleBeat><div className="hero-divider"/><p className="hero-event">{text.nikah}</p><p className="hero-date">{text.date(invitation.nikah.day, invitation.nikah.month, invitation.nikah.year)}</p></TitleBeat></TitleSequence>
+      <TitleSequence className="hero-inner"><TitleBeat><Bloom/></TitleBeat><TitleBeat><p className="arabic-intro" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p><LabelRule className="section-label">{text.blessings}</LabelRule></TitleBeat><h1><TitleBeat><span lang="en" dir="ltr">{invitation.groom}</span></TitleBeat><TitleBeat><em>&</em></TitleBeat><TitleBeat><span lang="en" dir="ltr">{invitation.bride}</span></TitleBeat></h1><TitleBeat><div className="hero-divider"/><p className="hero-event">{text.nikah}</p><p className="hero-date">{text.date(invitation.nikah.day, invitation.nikah.month, invitation.nikah.year)}</p></TitleBeat></TitleSequence>
       <a className="next-cue" href="#walima" aria-label={language === "ur" ? "ولیمے کی دعوت جاری رکھیں" : "Continue to the Valima invitation"}><ArrowDown size={18}/></a>
     </section>
     <CelebrationReveal src={ballroom} title={text.walima}/>
     <section id="walima" className="paper-section scratch-section cinematic-section">
       <div className="cinematic-backdrop"><CameraImage src={ballroom} alt=""/></div>
+      <GhostWord text="WALIMA"/>
+      <ParallaxRing className="scratch-ring"/>
       <Appear>
         <Bloom/>
         {/* <SectionLabel>{text.littleSurprise}</SectionLabel> */}
-        <h2>{text.scratchTitle}</h2>
+        <RevealTitle language={language} text={text.scratchTitle}/>
         <p className="scratch-intro">{text.scratchIntro}</p>
         <ScratchReveal language={language} text={text}>
           <p className="scratch-kicker">{text.invited}</p>
@@ -228,7 +239,10 @@ export function walimaExperience() {
       <Countdown language={language}/>
       <section id="rsvp" className="royal-section rsvp-section cinematic-section">
       <div className="cinematic-backdrop"><CameraImage src={attire} alt=""/></div>
-      <Appear><Bloom/><SectionLabel>{text.love}</SectionLabel><h2>{text.rsvpTitle}</h2><p>{text.rsvpMessage}</p><Button variant="cinema" size="cinemaLarge" asChild><a href={whatsapp} target="_blank" rel="noreferrer"><MessageCircle/> {text.rsvpButton}</a></Button><p className="rsvp-signoff" lang="en" dir="ltr">{coupleNames}</p></Appear>
+      <GhostWord text="CELEBRATE" className="ghost-royal"/>
+      <ParallaxRing className="rsvp-ring"/>
+      <ParticleField/>
+      <Appear><Bloom/><LabelRule className="section-label">{text.love}</LabelRule><RevealTitle language={language} text={text.rsvpTitle}/><p>{text.rsvpMessage}</p><Button variant="cinema" size="cinemaLarge" asChild><a href={whatsapp} target="_blank" rel="noreferrer"><MessageCircle/> {text.rsvpButton}</a></Button><p className="rsvp-signoff" lang="en" dir="ltr">{coupleNames}</p></Appear>
     </section>
   </main></InvitationMotionContext.Provider>;
 }
