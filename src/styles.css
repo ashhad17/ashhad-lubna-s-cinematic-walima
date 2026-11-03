@@ -206,7 +206,7 @@
 @media (prefers-reduced-motion:reduce) { .cover-sparkles { display:none; }.film-transition { height:auto; }.film-sticky { position:relative; }.invitation-page a:active,.invitation-page button:active { scale:1; } }
 
 .scratch-section { min-height:auto; padding-top:110px; padding-bottom:100px; }
-.scratch-section>div:not(.cinematic-backdrop) { width:100%; max-width:520px; display:flex; flex-direction:column; align-items:center; text-align:center; }
+.scratch-section>div:not(.cinematic-backdrop):not(.ghost-layer):not(.parallax-ring) { width:100%; max-width:520px; display:flex; flex-direction:column; align-items:center; text-align:center; }
 .scratch-section h2 { margin-bottom:12px; }
 .scratch-intro { max-width:310px; margin:0 auto 28px; color:var(--muted-foreground); }
 .scratch-card { position:relative; width:min(100%,370px); min-height:410px; aspect-ratio:.9; margin:0 auto; overflow:hidden; border:1px solid var(--gold); background:linear-gradient(145deg,#f8f2e7,#eee3d1); box-shadow:var(--shadow-cinema); }
@@ -236,7 +236,7 @@
 .hero-section.cinematic-section .frame-corner { z-index:1; }
 .cinematic-section .section-label { color:var(--gold-bright); }
 .countdown-section.cinematic-section { min-height:100svh; }
-.countdown-section>div:not(.cinematic-backdrop) { width:min(100%,440px); }
+.countdown-section>div:not(.cinematic-backdrop):not(.ghost-layer):not(.parallax-ring) { width:min(100%,440px); }
 .countdown-section h2 { color:var(--ivory); }
 .cinematic-section .countdown-grid>div { border-color:color-mix(in srgb,var(--gold-bright) 50%,transparent); }
 .cinematic-section .countdown-grid>div:nth-child(odd) { border-right-color:color-mix(in srgb,var(--gold-bright) 50%,transparent); }
@@ -245,7 +245,7 @@
 .scratch-section.cinematic-section h2 { color:var(--ivory); }
 .scratch-section.cinematic-section .scratch-intro { color:var(--ivory); }
 .rsvp-section.cinematic-section .section-label { color:var(--gold-bright); }
-.rsvp-section.cinematic-section>div:not(.cinematic-backdrop) { max-width:440px; }
+.rsvp-section.cinematic-section>div:not(.cinematic-backdrop):not(.ghost-layer):not(.parallax-ring) { max-width:440px; }
 @media (max-width:375px) { .scratch-card { min-height:370px; }.scratch-details { padding:27px 20px; }.scratch-date { font-size:74px; }.scratch-names { font-size:21px!important; } }
 
 .scratch-card { width:min(100%,430px); min-height:0; aspect-ratio:1; overflow:visible; border:0; background:transparent; box-shadow:none; }

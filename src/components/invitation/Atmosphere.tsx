@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useReducedMotion, useSpring } from "motion/react";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, type CSSProperties } from "react";
 
 export function IslamicPattern({ className = "" }: { className?: string }) {
   const reduced = useReducedMotion();
@@ -31,7 +31,7 @@ export function ParticleField() {
   return (
     <div className="particles" aria-hidden="true">
       {particles.map((particle) => (
-        <i key={particle.id} style={particle} />
+        <i key={particle.id} style={{ left: particle.left, top: particle.top, width: particle.size, height: particle.size, "--delay": particle.delay, "--duration": particle.duration } as CSSProperties} />
       ))}
     </div>
   );
