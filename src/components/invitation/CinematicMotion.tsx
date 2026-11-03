@@ -1,5 +1,6 @@
 import { createContext, useContext, useRef, type ReactNode } from "react";
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
+import { IslamicPattern } from "./Atmosphere";
 
 export const InvitationMotionContext = createContext(false);
 
@@ -36,10 +37,13 @@ export function CelebrationReveal({ src, title }: { src: string; title: string }
   const aperture = useTransform(scrollYProgress, [0, .7], ["inset(18% 20% 18% 20% round 180px 180px 0 0)", "inset(0% 0% 0% 0% round 0px 0px 0 0)"]);
   const scale = useTransform(scrollYProgress, [0, 1], [1.22, 1]);
   const y = useTransform(scrollYProgress, [0, .8], [30, -16]);
+  const glowY = useTransform(scrollYProgress, [0, 1], ["-14%", "14%"]);
   const titleScale = useTransform(scrollYProgress, [0, .8], [.88, 1]);
   const lineScale = useTransform(scrollYProgress, [0, .65], [.08, 1]);
   return <section ref={ref} className={`celebration-reveal ${reduced ? "celebration-still" : ""}`} aria-label={title}>
     <div className="celebration-sticky">
+      <motion.div className="celebration-glow" style={reduced ? {} : { y: glowY }} aria-hidden="true"/>
+      <div className="cover-sparkles" aria-hidden="true">{Array.from({ length: 6 }, (_, i) => <i key={i}/>)}</div>
       <motion.div className="celebration-aperture" style={reduced ? {} : { clipPath: aperture }}><motion.img src={src} alt="" loading="lazy" style={reduced ? {} : { scale }}/></motion.div>
       <div className="celebration-title"><span className="celebration-ornament" aria-hidden="true">✦</span><motion.span className="celebration-line" style={reduced ? {} : { scaleX: lineScale }}/><motion.h2 style={reduced ? {} : { y, scale: titleScale }}>{title}</motion.h2><motion.span className="celebration-line" style={reduced ? {} : { scaleX: lineScale }}/></div>
     </div>
