@@ -8,8 +8,8 @@ import ballroom from "@/assets/walima-ballroom.jpg";
 import { Button } from "@/components/ui/button";
 import { coupleNames, invitation, walimaDate } from "@/data/invitation";
 import { LocationButton } from "./Controls";
-import { IslamicPattern } from "./Atmosphere";
-import { Appear, CameraImage, CelebrationReveal, InvitationMotionContext, ReadingProgress, TitleBeat, TitleSequence } from "./CinematicMotion";
+import { IslamicPattern, ParticleField } from "./Atmosphere";
+import { Appear, CameraImage, CelebrationReveal, CharsReveal, GhostWord, InvitationMotionContext, LabelRule, ParallaxRing, ReadingProgress, ScrollSpin, SheenTitle, TitleBeat, TitleSequence } from "./CinematicMotion";
 import { ScratchReveal } from "./ScratchReveal";
 import { MarkedCalendar } from "./MarkedCalendar";
 import { CountdownDigits } from "./CountdownDigits";
@@ -114,6 +114,10 @@ function Bloom() {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return <p className="section-label">{children}</p>;
+}
+
+function RevealTitle({ language, text }: { language: Language; text: string }) {
+  return <h2>{<SheenTitle>{language === "en" ? <CharsReveal text={text}/> : text}</SheenTitle>}</h2>;
 }
 
 function Countdown({ language }: { language: Language }) {
