@@ -214,10 +214,12 @@ export function walimaExperience() {
     <CelebrationReveal src={ballroom} title={text.walima}/>
     <section id="walima" className="paper-section scratch-section cinematic-section">
       <div className="cinematic-backdrop"><CameraImage src={ballroom} alt=""/></div>
+      <GhostWord text="WALIMA"/>
+      <ParallaxRing className="scratch-ring"/>
       <Appear>
         <Bloom/>
         {/* <SectionLabel>{text.littleSurprise}</SectionLabel> */}
-        <h2>{text.scratchTitle}</h2>
+        <RevealTitle language={language} text={text.scratchTitle}/>
         <p className="scratch-intro">{text.scratchIntro}</p>
         <ScratchReveal language={language} text={text}>
           <p className="scratch-kicker">{text.invited}</p>
@@ -237,7 +239,10 @@ export function walimaExperience() {
       <Countdown language={language}/>
       <section id="rsvp" className="royal-section rsvp-section cinematic-section">
       <div className="cinematic-backdrop"><CameraImage src={attire} alt=""/></div>
-      <Appear><Bloom/><SectionLabel>{text.love}</SectionLabel><h2>{text.rsvpTitle}</h2><p>{text.rsvpMessage}</p><Button variant="cinema" size="cinemaLarge" asChild><a href={whatsapp} target="_blank" rel="noreferrer"><MessageCircle/> {text.rsvpButton}</a></Button><p className="rsvp-signoff" lang="en" dir="ltr">{coupleNames}</p></Appear>
+      <GhostWord text="CELEBRATE" className="ghost-royal"/>
+      <ParallaxRing className="rsvp-ring"/>
+      <ParticleField/>
+      <Appear><Bloom/><LabelRule className="section-label">{text.love}</LabelRule><RevealTitle language={language} text={text.rsvpTitle}/><p>{text.rsvpMessage}</p><Button variant="cinema" size="cinemaLarge" asChild><a href={whatsapp} target="_blank" rel="noreferrer"><MessageCircle/> {text.rsvpButton}</a></Button><p className="rsvp-signoff" lang="en" dir="ltr">{coupleNames}</p></Appear>
     </section>
   </main></InvitationMotionContext.Provider>;
 }
