@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from "react";
-import type { InvitationCopy, InvitationLanguage } from "./walimaExperience";
+import type { InvitationCopy, InvitationLanguage } from "./WalimaExperience";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Button } from "@/components/ui/button";
 
