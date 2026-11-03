@@ -27,4 +27,4 @@ export const compactDate = (date: Date) => date.toISOString().replace(/[-:]/g, "
 export const coupleNames = `${invitation.groom} & ${invitation.bride}`;
 
 export const rsvpMessage =
-  `Assalamu Alaikum! I would love to attend the Walima celebration of ${coupleNames} on ${invitation.walima.date}. Looking forward to celebrating with you!`;
+  `Assalamu Alaikum! I would love to attend the Valima celebration of ${coupleNames} on ${invitation.walima.date}. Looking forward to celebrating with you!`;

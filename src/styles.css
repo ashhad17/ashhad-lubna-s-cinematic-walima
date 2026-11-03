@@ -362,14 +362,20 @@
 /* Engraved timekeeping and an invitation-paper calendar. */
 .countdown-section.cinematic-section { min-height:90svh; }
 .countdown-section h2 { max-width:300px; font-size:44px; margin-bottom:24px; }
+.countdown-anticipation { margin:16px auto 14px; color:var(--gold-bright); font:italic 24px/1.2 var(--font-display)!important; }
+.countdown-verse { width:min(100%,360px); margin:0 auto 30px; padding:16px 18px 14px; border-top:1px solid color-mix(in srgb,var(--gold-bright) 55%,transparent); border-bottom:1px solid color-mix(in srgb,var(--gold-bright) 55%,transparent); }
+.countdown-verse-arabic { margin:0 0 10px; color:var(--ivory); font:30px/1.6 var(--font-arabic)!important; }
+.countdown-verse footer { display:flex; flex-direction:column; gap:6px; color:color-mix(in srgb,var(--ivory) 86%,transparent); font-size:12px; line-height:1.6; }
+.countdown-verse cite { color:var(--gold-bright); font-size:10px; font-style:normal; letter-spacing:.08em; }
 .countdown-clock-face { display:flex; align-items:center; justify-content:center; gap:18px; color:var(--gold-bright); }
 .countdown-clock-face i { display:block; width:100px; height:1px; background:var(--border); }
-.countdown-grid { width:100%; max-width:340px; margin-top:24px; }
-.countdown-grid .countdown-unit { padding:18px 10px 23px; }
-.countdown-grid .countdown-numeral { position:relative; display:flex; justify-content:center; align-items:center; height:90px; overflow:hidden; color:var(--ivory); }
-.countdown-numeral strong { display:block; font-size:80px; line-height:1; }
-.countdown-grid .countdown-unit-label { margin-top:8px; color:var(--gold-bright); font-size:12px; }
-.countdown-section p.countdown-event-date { font:22px/1.4 var(--font-display); color:var(--gold-bright); margin:32px auto 0; }
+.countdown-grid { width:100%; max-width:390px; margin:12px auto 0; grid-template-columns:repeat(4,minmax(0,1fr)); }
+.countdown-grid>div,.countdown-grid .countdown-unit { min-width:0; padding:8px 2px 10px; border:0; border-right:1px solid color-mix(in srgb,var(--gold-bright) 38%,transparent); }
+.countdown-grid>div:last-child { border-right:0; }
+.countdown-grid .countdown-numeral { position:relative; display:flex; justify-content:center; align-items:center; height:48px; overflow:hidden; color:var(--ivory); }
+.countdown-numeral strong { display:block; font-size:clamp(27px,8vw,40px); line-height:1; }
+.countdown-grid .countdown-unit-label { margin-top:5px; color:var(--gold-bright); font-size:clamp(8px,2.4vw,10px); letter-spacing:.04em; white-space:nowrap; }
+.countdown-section p.countdown-event-date { font:22px/1.4 var(--font-display); color:var(--gold-bright); margin:18px auto 0; }
 .countdown-event-date span { display:block; margin-top:6px; font:12px/1.5 var(--font-sans); color:var(--ivory); }
 .scratch-progress { width:100px; height:2px; background:var(--border); overflow:hidden; margin:12px auto; }
 .scratch-progress span { display:block; height:100%; background:var(--gold-ink); transform-origin:left; }
@@ -378,10 +384,10 @@
 .scratch-section .scratch-reveal { max-width:430px; }
 .scratch-heart { box-shadow:none; }
 .scratch-hint { font-size:11px; color:var(--rose-ink); }
-.marked-calendar-section { min-height:auto; padding-top:85px; padding-bottom:85px; }
-.marked-calendar-inner { width:100%; max-width:380px; }
+.marked-calendar-panel { width:min(100%,420px); margin:40px auto 0; padding:24px 18px 22px; border:1px solid color-mix(in srgb,var(--gold-ink) 48%,transparent); border-radius:8px; background:var(--ivory); color:var(--ink); box-shadow:0 16px 42px color-mix(in srgb,var(--cinema-shadow) 38%,transparent); }
+.marked-calendar-inner { width:100%; max-width:380px; margin:auto; }
 .calendar-heart { margin:auto; color:var(--gold-ink); stroke-width:1.2; }
-.marked-calendar-section h2 { font-size:44px; margin:12px 0 30px; }
+.marked-calendar-panel h3 { margin:10px 0 18px; color:var(--ink); font:500 30px/1.1 var(--font-display); }
 .wedding-calendar-wrap { border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:22px 0 20px; }
 .wedding-calendar { width:100%; padding:0; background:transparent; --cell-size:44px; }
 .wedding-calendar .rdp-months { width:100%; }
@@ -399,10 +405,12 @@
 .calendar-legend { display:flex; justify-content:center; gap:30px; margin:20px 0; font-size:12px; color:var(--gold-ink); }
 .calendar-legend span { display:flex; align-items:center; gap:8px; }
 .nikah-dot { width:7px; height:7px; border:1px solid var(--gold); border-radius:50%; }
-.calendar-event { min-height:85px; margin:26px auto 10px; }
+.calendar-hint { margin:14px 0 0; color:var(--muted-foreground); font-size:11px!important; }
+.calendar-event { min-height:85px; margin:12px auto 10px; }
 .calendar-event p { margin:5px 0; font-size:13px!important; color:var(--muted-foreground); }
 .calendar-event p.calendar-event-name { font:500 28px/1.2 var(--font-display)!important; color:var(--ink); }
-.marked-calendar-section .calendar-actions { gap:10px; }
-.marked-calendar-section .calendar-actions>* { width:100%; }
-.marked-calendar-section .calendar-actions button { color:var(--gold-ink); }
+.marked-calendar-panel .calendar-actions { gap:10px; }
+.marked-calendar-panel .calendar-actions>* { width:100%; }
+.marked-calendar-panel .calendar-actions button { color:var(--gold-ink); }
 @media (max-width:375px) { .countdown-numeral strong { font-size:68px; }.wedding-calendar .rdp-day button { font-size:13px; } }
+@media (prefers-reduced-motion:reduce) { .countdown-anticipation,.countdown-verse { transition:none; } }

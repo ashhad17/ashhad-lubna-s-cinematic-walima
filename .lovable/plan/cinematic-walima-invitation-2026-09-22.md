@@ -1,7 +1,7 @@
-# Cinematic Walima Invitation
+# Cinematic walima Invitation
 
 ## Experience
-- Build one continuous, mobile-first cinematic journey across all 15 requested scenes, from darkness and Nikah memory through the Walima reveal, date, venue, RSVP, and finale.
+- Build one continuous, mobile-first cinematic journey across all 15 requested scenes, from darkness and Nikah memory through the walima reveal, date, venue, RSVP, and finale.
 - Use oversized editorial typography, emerald-black atmospheres, restrained foil-gold light, geometric linework, haze, grain, and depth instead of stacked cards or conventional sections.
 - Add a restrained 3D opening invitation, scroll-linked camera movement, scene transitions, particles, an interactive golden story path, desktop cursor effects, and reduced-motion alternatives.
 

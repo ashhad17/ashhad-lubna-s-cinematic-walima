@@ -69,9 +69,9 @@ function calendarUrl() {
   const end = compactDate(walimaEndDate);
   const params = new URLSearchParams({
     action: "TEMPLATE",
-    text: `Walima of ${invitation.groom} & ${invitation.bride}`,
+    text: `Valima of ${invitation.groom} & ${invitation.bride}`,
     dates: `${start}/${end}`,
-    details: "With the blessings of Allah and our families, we invite you to celebrate our Walima.",
+    details: "With the blessings of Allah and our families, we invite you to celebrate our Valima.",
     location: `${invitation.walima.venue}, ${invitation.walima.address}`,
   });
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
@@ -79,17 +79,17 @@ function calendarUrl() {
 
 export function downloadCalendar() {
   const contents = [
-    "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Walima Invitation//EN", "BEGIN:VEVENT",
+    "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Valima Invitation//EN", "BEGIN:VEVENT",
     `UID:walima-${compactDate(walimaDate)}@invitation`,
     `DTSTAMP:${compactDate(new Date())}`, `DTSTART:${compactDate(walimaDate)}`, `DTEND:${compactDate(walimaEndDate)}`,
-    `SUMMARY:Walima of ${invitation.groom} & ${invitation.bride}`,
+    `SUMMARY:Valima of ${invitation.groom} & ${invitation.bride}`,
     `LOCATION:${invitation.walima.venue}\\, ${invitation.walima.address}`,
-    "DESCRIPTION:With the blessings of Allah and our families\\, we invite you to celebrate our Walima.",
+    "DESCRIPTION:With the blessings of Allah and our families\\, we invite you to celebrate our Valima.",
     "END:VEVENT", "END:VCALENDAR",
   ].join("\r\n");
   const link = document.createElement("a");
   link.href = URL.createObjectURL(new Blob([contents], { type: "text/calendar" }));
-  link.download = "Ashhad-Lubna-Walima.ics";
+  link.download = "Ashhad-Lubna-Valima.ics";
   link.click();
   URL.revokeObjectURL(link.href);
 }

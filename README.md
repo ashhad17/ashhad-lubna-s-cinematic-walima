@@ -1,6 +1,6 @@
-# Ashhad & Lubna's Cinematic Walima
+# Ashhad & Lubna's Cinematic walima
 
-Build an award-winning, cinematic, immersive digital wedding invitation website for the Walima celebration of Mohammed Ashhad & Lubna Fathima.
+Build an award-winning, cinematic, immersive digital wedding invitation website for the walima celebration of Mohammed Ashhad & Lubna Fathima.
 
 This must NOT look like a normal wedding website.
 
@@ -30,9 +30,9 @@ The website is NOT inviting guests to the Nikah.
 
 The website is inviting guests to the:
 
-WALIMA
+walima
 
-Walima:
+walima:
 
 13 December 2026
 7:30 PM
@@ -44,7 +44,7 @@ Airport Road, Bengaluru, Karnataka
 
 The entire experience should tell this story:
 
-Two people → Nikah → New chapter → Celebration → Walima invitation
+Two people → Nikah → New chapter → Celebration → walima invitation
 
 
 
@@ -158,7 +158,7 @@ Use an elegant high-fashion serif/display font for:
 
 MOHAMMED ASHHAD
 LUBNA FATHIMA
-WALIMA
+walima
 
 Use a clean modern sans-serif for supporting information.
 
@@ -397,7 +397,7 @@ The entire page transitions from dark green into a richer emerald/gold environme
 
 Then reveal:
 
-WALIMA
+walima
 
 Make this moment feel like a movie title reveal.
 
@@ -413,7 +413,7 @@ YOU ARE INVITED
 
 Then:
 
-TO CELEBRATE THE WALIMA OF
+TO CELEBRATE THE walima OF
 
 Then reveal:
 
@@ -477,7 +477,7 @@ NIKAH
 ↓
 A NEW CHAPTER
 ↓
-WALIMA
+walima
 ↓
 CELEBRATION
 
@@ -541,7 +541,7 @@ If suitable images are unavailable, create tasteful placeholders that can easily
 
 
 
-SCENE 11 — THE WALIMA VENUE
+SCENE 11 — THE walima VENUE
 
 Transition into a cinematic venue reveal.
 
@@ -632,7 +632,7 @@ RSVP ON WHATSAPP
 
 WhatsApp message:
 
-“Assalamu Alaikum! I would love to attend the Walima celebration of Mohammed Ashhad & Lubna Fathima on 13 December 2026. Looking forward to celebrating with you!”
+“Assalamu Alaikum! I would love to attend the walima celebration of Mohammed Ashhad & Lubna Fathima on 13 December 2026. Looking forward to celebrating with you!”
 
 
 
@@ -822,7 +822,7 @@ Example:
 
 01 — INTRO
 02 — BEGINNING
-03 — WALIMA
+03 — walima
 04 — CELEBRATION
 05 — RSVP
 
@@ -940,11 +940,11 @@ elegant social preview
 
 Title:
 
-Mohammed Ashhad & Lubna Fathima — Walima
+Mohammed Ashhad & Lubna Fathima — walima
 
 Description:
 
-With the blessings of Allah and our families, we invite you to celebrate our Walima.
+With the blessings of Allah and our families, we invite you to celebrate our walima.
 
 
 
@@ -966,7 +966,7 @@ src/
 
     NikahStory
 
-    WalimaReveal
+    walimaReveal
 
     DateReveal
 
