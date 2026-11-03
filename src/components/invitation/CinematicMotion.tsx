@@ -42,9 +42,9 @@ export function CelebrationReveal({ src, title }: { src: string; title: string }
   const lineScale = useTransform(scrollYProgress, [0, .65], [.08, 1]);
   return <section ref={ref} className={`celebration-reveal ${reduced ? "celebration-still" : ""}`} aria-label={title}>
     <div className="celebration-sticky">
+      <motion.div className="celebration-aperture" style={reduced ? {} : { clipPath: aperture }}><motion.img src={src} alt="" loading="lazy" style={reduced ? {} : { scale }}/></motion.div>
       <motion.div className="celebration-glow" style={reduced ? {} : { y: glowY }} aria-hidden="true"/>
       <div className="cover-sparkles" aria-hidden="true">{Array.from({ length: 6 }, (_, i) => <i key={i}/>)}</div>
-      <motion.div className="celebration-aperture" style={reduced ? {} : { clipPath: aperture }}><motion.img src={src} alt="" loading="lazy" style={reduced ? {} : { scale }}/></motion.div>
       <div className="celebration-title"><span className="celebration-ornament" aria-hidden="true">✦</span><motion.span className="celebration-line" style={reduced ? {} : { scaleX: lineScale }}/><motion.h2 style={reduced ? {} : { y, scale: titleScale }}>{title}</motion.h2><motion.span className="celebration-line" style={reduced ? {} : { scaleX: lineScale }}/></div>
     </div>
   </section>;
