@@ -142,6 +142,7 @@ export function ScratchReveal({ children, language, text }: { children: ReactNod
             onPointerUp={finishScratch}
             onPointerCancel={finishScratch}
           />}</AnimatePresence>
+          {!revealed && <span className="scratch-foil-sheen" aria-hidden="true"/>}
           {!revealed && <span className="scratch-hint" aria-hidden="true">{text.scratchHint}</span>}
         </div>
       </div>
