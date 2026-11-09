@@ -1,8 +1,8 @@
 # Build roadmap
 
-- [ ] Refine countdown digits and scratch reveal feedback
-- [ ] Add a marked event calendar with calendar-saving actions
-- [ ] Verify dates, scratch completion, calendar controls, and phone layout
+- [x] Refine countdown digits and scratch reveal feedback
+- [x] Add a marked event calendar with calendar-saving actions
+- [ ] Restore missing atmospheric parallax styles and verify calendar hydration
 
 - [x] Enhance existing scenes with a cinematic walima reveal, distinct visual rhythm, and a refined heart reveal
 - [x] Verify the enhanced scenes, interactions, and reduced-motion fallback
@@ -13,3 +13,4 @@
 - [x] Recompose the invitation around the pasted mobile-first Nikah and walima chapters
 - [x] Add a physical-opening interaction, touch gallery, countdown, calendar, map, and RSVP actions
 - [x] Verify phone and desktop rendering, controls, and reduced-motion behavior
+- [x] Resolve missing parallax presentation styles and restore calendar-saving controls
