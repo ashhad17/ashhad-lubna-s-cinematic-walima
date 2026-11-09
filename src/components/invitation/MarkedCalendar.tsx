@@ -34,7 +34,7 @@ export function MarkedCalendar({ language }: { language: "en" | "ur" }) {
         <p className="calendar-event-name">{iswalima ? (language === "ur" ? "ولیمہ" : "The Walima") : (language === "ur" ? "نکاح" : "The Nikah")}</p>
         <p>{iswalima ? invitation.walima.date : invitation.nikah.date}{iswalima && <> · {invitation.walima.time}</>}</p>
       </div>
-      {/* {iswalima && <CalendarActions/>} */}
+      {iswalima && <CalendarActions/>}
     </Appear>
   </section>;
 }
