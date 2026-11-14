@@ -1,14 +1,15 @@
-# yaml-language-server: $schema=https://render.com/schema/render.yaml.json
-
 services:
   - type: web
-    name: tanstack-start
+    name: ashhad-lubna-wedding-invitation
     runtime: node
     plan: free
-    buildCommand: npm ci --include=dev && npm run build
+    buildCommand: npm ci && npm run build
     startCommand: node .output/server/index.mjs
-    healthCheckPath: /health
-    autoDeployTrigger: off
+    healthCheckPath: /
     envVars:
-      - key: HOST
-        value: 0.0.0.0
+      - key: NODE_VERSION
+        value: 24.22.1
+      - key: NITRO_PRESET
+        value: node-server
+      - key: VITE_SITE_URL
+        sync: false

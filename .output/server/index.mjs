@@ -33,51 +33,51 @@ var public_assets_data_default = {
 	"/assets/styles-BCXI1pnJ.css": {
 		"type": "text/css; charset=utf-8",
 		"etag": "\"1cc29-bwUI+f8A++jlNJ60zw9G3xC1jLQ\"",
-		"mtime": "2026-11-14T11:10:21.938Z",
+		"mtime": "2026-11-14T11:38:25.528Z",
 		"size": 117801,
 		"path": "../public/assets/styles-BCXI1pnJ.css"
 	},
 	"/assets/walima-attire-CSYkwYi-.jpg": {
 		"type": "image/jpeg",
 		"etag": "\"3ebc2-1Q0i/jaMkFvuUJ/2QbL8xfUmwy8\"",
-		"mtime": "2026-11-14T11:10:21.945Z",
+		"mtime": "2026-11-14T11:38:25.542Z",
 		"size": 256962,
 		"path": "../public/assets/walima-attire-CSYkwYi-.jpg"
-	},
-	"/assets/walima-ballroom-BmyTzGq4.jpg": {
-		"type": "image/jpeg",
-		"etag": "\"49ad1-i2pvhQ03yhgdRn1MYFozEeGg1Kc\"",
-		"mtime": "2026-11-14T11:10:21.949Z",
-		"size": 301777,
-		"path": "../public/assets/walima-ballroom-BmyTzGq4.jpg"
 	},
 	"/assets/walima-rings-CqOIHnUD.jpg": {
 		"type": "image/jpeg",
 		"etag": "\"1d3ac-xBuwZd3QKnSF22XJHBnzdWuqFR4\"",
-		"mtime": "2026-11-14T11:10:21.952Z",
+		"mtime": "2026-11-14T11:38:25.548Z",
 		"size": 119724,
 		"path": "../public/assets/walima-rings-CqOIHnUD.jpg"
+	},
+	"/assets/walima-ballroom-BmyTzGq4.jpg": {
+		"type": "image/jpeg",
+		"etag": "\"49ad1-i2pvhQ03yhgdRn1MYFozEeGg1Kc\"",
+		"mtime": "2026-11-14T11:38:25.544Z",
+		"size": 301777,
+		"path": "../public/assets/walima-ballroom-BmyTzGq4.jpg"
 	},
 	"/assets/walima-silhouette-C93l_3sE.jpg": {
 		"type": "image/jpeg",
 		"etag": "\"2b9f6-DNXeGv2y2I+X1LpbvhOet4r+0no\"",
-		"mtime": "2026-11-14T11:10:21.956Z",
+		"mtime": "2026-11-14T11:38:25.548Z",
 		"size": 178678,
 		"path": "../public/assets/walima-silhouette-C93l_3sE.jpg"
 	},
-	"/assets/index-DQIP_KTj.js": {
+	"/assets/routes-Cy4Gt76K.js": {
 		"type": "text/javascript; charset=utf-8",
-		"etag": "\"5a70c-TrSeiaYxGWp8u3uBB6glhHJzflw\"",
-		"mtime": "2026-11-14T11:10:21.844Z",
-		"size": 370444,
-		"path": "../public/assets/index-DQIP_KTj.js"
-	},
-	"/assets/routes-COIQEjVU.js": {
-		"type": "text/javascript; charset=utf-8",
-		"etag": "\"4207e-BQfpkBBbsLSoFmHIHm6phn7oXGs\"",
-		"mtime": "2026-11-14T11:10:21.904Z",
+		"etag": "\"4207e-kgy14B6pi6gvNqz9gg79HgREPxs\"",
+		"mtime": "2026-11-14T11:38:25.493Z",
 		"size": 270462,
-		"path": "../public/assets/routes-COIQEjVU.js"
+		"path": "../public/assets/routes-Cy4Gt76K.js"
+	},
+	"/assets/index-D2-JoSwM.js": {
+		"type": "text/javascript; charset=utf-8",
+		"etag": "\"5a9de-Qe/0EfXT5xp+Z68qZCSKlZxT/bA\"",
+		"mtime": "2026-11-14T11:38:25.423Z",
+		"size": 371166,
+		"path": "../public/assets/index-D2-JoSwM.js"
 	},
 	"/Green and Gold Elegant Wedding Invitation Card.png": {
 		"type": "image/png",
