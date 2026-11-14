@@ -449,6 +449,7 @@
 .ghost-layer.ghost-royal > span { -webkit-text-stroke-color:color-mix(in srgb,var(--gold-bright) 64%,transparent); }
 .ghost-layer.ghost-arabic { opacity:.17; }
 .ghost-layer.ghost-arabic > span { font:400 176px/.9 var(--font-arabic); }
+.ghost-layer.ghost-valima > span { font-size:clamp(26px,8vw,72px); }
 .parallax-ring {
   left:50%;
   top:50%;

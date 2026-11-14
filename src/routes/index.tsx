@@ -1,16 +1,26 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { walimaExperience } from "@/components/invitation/WalimaExperience";
-import { coupleNames, invitation } from "@/data/invitation";
+import { coupleNames } from "@/data/invitation";
+
+const invitationDescription =
+  "By the grace of Allah, we joyfully invite you to celebrate our wedding reception as we begin our new journey together, united in faith, love, and companionship. Your presence would be a blessing and a cherished gift to us. Please join us in sharing this special and blessed occasion with our family and friends.";
+const invitationCoverImage = "/Green%20and%20Gold%20Elegant%20Wedding%20Invitation%20Card.png";
+const invitationTitle = `${coupleNames} — The Valima / Reception Invitation`;
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: `${coupleNames} — Nikah & Valima Invitation` },
-      { name: "description", content: `With the blessings of Allah, join ${coupleNames} for their Nikah on ${invitation.nikah.date} and Valima on ${invitation.walima.date}.` },
-      { property: "og:title", content: `${coupleNames} — Nikah & Valima Invitation` },
-      { property: "og:description", content: `Nikah · ${invitation.nikah.date}. Valima · ${invitation.walima.date}, ${invitation.walima.time}, ${invitation.walima.venue}.` },
+      { title: invitationTitle },
+      { name: "description", content: invitationDescription },
+      { property: "og:title", content: invitationTitle },
+      { property: "og:description", content: invitationDescription },
+      { property: "og:image", content: invitationCoverImage },
+      { property: "og:image:alt", content: `${coupleNames} wedding reception invitation` },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: invitationTitle },
+      { name: "twitter:description", content: invitationDescription },
+      { name: "twitter:image", content: invitationCoverImage },
     ],
   }),
   component: walimaExperience,

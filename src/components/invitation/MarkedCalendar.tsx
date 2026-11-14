@@ -31,7 +31,7 @@ export function MarkedCalendar({ language }: { language: "en" | "ur" }) {
       <div className="calendar-legend"><span><i className="nikah-dot"/>{language === "ur" ? "نکاح" : "Nikah"}</span><span><Heart size={12}/>{language === "ur" ? "ولیمہ" : "Walima"}</span></div>
       <p className="calendar-hint">{language === "ur" ? "تفصیلات دیکھنے کے لیے نشان زد تاریخ منتخب کریں" : "Select a marked date to see its details"}</p>
       <div className="calendar-event" aria-live="polite" aria-atomic="true">
-        <p className="calendar-event-name">{iswalima ? (language === "ur" ? "ولیمہ" : "The Walima") : (language === "ur" ? "نکاح" : "The Nikah")}</p>
+        <p className="calendar-event-name">{iswalima ? (language === "ur" ? "ولیمہ" : "The Valima / Reception") : (language === "ur" ? "نکاح" : "The Nikah")}</p>
         <p>{iswalima ? invitation.walima.date : invitation.nikah.date}{iswalima && <> · {invitation.walima.time}</>}</p>
       </div>
       {iswalima && <CalendarActions/>}

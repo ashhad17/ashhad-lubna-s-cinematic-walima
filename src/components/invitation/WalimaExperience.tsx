@@ -22,47 +22,47 @@ const copy = {
     blessings: "With the blessings of Allah",
     openInvitation: "Open invitation",
     nikah: "The Nikah",
-    walima: "Walima",
+    walima: "Valima / Reception",
     littleSurprise: "",
     scratchTitle: "Scratch to reveal",
     scratchIntro: "A little heart holds the details of the day we celebrate our love.",
-    invited: "You’re invited to celebrate the Valima of",
+    invited: "You’re invited to celebrate the Valima / Reception of",
     scratchHint: "Scratch here to uncover",
     scratchStatus: "Scratch the heart to reveal the invitation, or use the button below.",
-    revealedStatus: "Your Valima invitation is revealed.",
+    revealedStatus: "Your Valima / Reception invitation is revealed.",
     revealButton: "Reveal with love",
     untilCelebrate: "Until we celebrate",
-    countdownTitle: "Counting down to our Walima",
+    countdownTitle: "Counting down to our Valima / Reception",
     anticipation: "A blessed moment is drawing near",
     countdownUnits: ["Days", "Hours", "Minutes", "Seconds"],
     today: "Today is the day. Alhamdulillah.",
     verseTranslation: invitation.verse.english,
     love: "With all our love",
     rsvpTitle: "Join us as our forever begins.",
-    rsvpMessage: "Your presence, prayers and blessings would make our celebration complete.",
+    rsvpMessage: "Your presence, prayers and blessings would make our Valima / Reception celebration complete.",
     rsvpButton: "RSVP on WhatsApp",
     location: "Open location",
     date: (day: string, month: string, year: string) => `${day} · ${month} · ${year}`,
     walimaDate: (day: string, month: string, year: string) => `${day} ${month} ${year}`,
     walimaTime: (day: string, time: string) => `${day} · ${time}`,
-    whatsapp: (names: string, date: string) => `Assalamu Alaikum! I would love to attend the Valima celebration of ${names} on ${date}. Looking forward to celebrating with you!`,
+    whatsapp: (names: string, date: string) => `Assalamu Alaikum! I would love to attend the Valima / Reception celebration of ${names} on ${date}. Looking forward to celebrating with you!`,
   },
   ur: {
     specialInvitation: "خصوصی دعوت نامہ",
     blessings: "اللہ کے فضل و کرم سے",
     openInvitation: "دعوت نامہ کھولیں",
     nikah: "نکاح",
-    walima: "ولیمہ",
+    walima: "ولیمہ / استقبال",
     littleSurprise: "محبت بھرا ایک چھوٹا سا تحفہ",
     scratchTitle: "دل کو کھرچ کر دعوت دیکھیے",
     scratchIntro: "ہمارے جشن کی تفصیلات جاننے کے لیے دل کو آہستہ سے کھرچیں۔",
-    invited: "آپ کو ولیمہ میں شرکت کی دعوت ہے",
+    invited: "آپ کو ولیمہ / استقبال میں شرکت کی دعوت ہے",
     scratchHint: "دعوت دیکھنے کے لیے یہاں کھرچیں",
     scratchStatus: "دعوت دیکھنے کے لیے دل کو کھرچیں یا نیچے بٹن دبائیں۔",
-    revealedStatus: "آپ کے ولیمے کی دعوت ظاہر ہو گئی ہے۔",
+    revealedStatus: "آپ کے ولیمے / استقبال کی دعوت ظاہر ہو گئی ہے۔",
     revealButton: "محبت سے دعوت دیکھیے",
     untilCelebrate: "جشن تک باقی وقت",
-    countdownTitle: "ولیمے میں باقی وقت",
+    countdownTitle: "ولیمہ / استقبال میں باقی وقت",
     anticipation: "ایک بابرکت لمحہ قریب آ رہا ہے",
     countdownUnits: ["دن", "گھنٹے", "منٹ", "سیکنڈ"],
     today: "آج خوشی کا دن ہے، الحمدللہ۔",
@@ -75,7 +75,7 @@ const copy = {
     date: (day: string, month: string, year: string) => `${urduDigits(day)} · ${urduMonth(month)} · ${urduDigits(year)}`,
     walimaDate: (day: string, month: string, year: string) => `${urduDigits(day)} ${urduMonth(month)} ${urduDigits(year)}`,
     walimaTime: (day: string, time: string) => `${urduDay(day)} · ${urduTime(time)}`,
-    whatsapp: (names: string, date: string) => `السلام علیکم! ${date} کو ${names} کے ولیمے میں شرکت کی تصدیق ہے۔ آپ کی خوشی میں شریک ہونے کی خوشی ہوگی۔`,
+    whatsapp: (names: string, date: string) => `السلام علیکم! ${date} کو ${names} کے ولیمہ / استقبال میں شرکت کی تصدیق ہے۔ آپ کی خوشی میں شریک ہونے کی خوشی ہوگی۔`,
   },
 } as const;
 
@@ -117,7 +117,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 }
 
 function RevealTitle({ language, text }: { language: Language; text: string }) {
-  return <h2>{<SheenTitle>{language === "en" ? <CharsReveal text={text}/> : text}</SheenTitle>}</h2>;
+  return <h4>{<SheenTitle>{language === "en" ? <CharsReveal text={text}/> : text}</SheenTitle>}</h4>;
 }
 
 function Countdown({ language }: { language: Language }) {
@@ -214,7 +214,7 @@ export function walimaExperience() {
     <CelebrationReveal src={ballroom} title={text.walima}/>
     <section id="walima" className="paper-section scratch-section cinematic-section">
       <div className="cinematic-backdrop"><CameraImage src={ballroom} alt=""/></div>
-      <GhostWord text="WALIMA"/>
+      <GhostWord text="VALIMA / RECEPTION" className="ghost-valima"/>
       <ParallaxRing className="scratch-ring"/>
       <Appear>
         <Bloom/>
