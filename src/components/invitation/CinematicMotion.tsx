@@ -1,4 +1,4 @@
-import { createContext, useContext, useRef, type ReactNode } from "react";
+import { Fragment, createContext, useContext, useRef, type ReactNode } from "react";
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
 import { IslamicPattern } from "./Atmosphere";
 
@@ -101,9 +101,18 @@ export function SheenTitle({ children, className = "" }: { children: ReactNode; 
 
 export function CharsReveal({ text, className = "" }: { text: string; className?: string }) {
   const reduced = useReducedMotion();
+  let characterIndex = 0;
   return <span className={`chars-reveal ${className}`} aria-label={text}>
-    {Array.from(text).map((char, index) => (
-      <motion.span key={`${char}-${index}`} aria-hidden="true" initial={reduced ? false : { opacity: 0, y: ".55em", rotate: 5 }} whileInView={{ opacity: 1, y: 0, rotate: 0 }} viewport={{ once: true, amount: .7 }} transition={{ duration: reduced ? 0 : .9, delay: reduced ? 0 : index * .04, ease: [.16, 1, .3, 1] }}>{char === " " ? "\u00A0" : char}</motion.span>
+    {text.split(" ").map((word, wordIndex) => (
+      <Fragment key={`word-${wordIndex}`}>
+        {wordIndex > 0 ? " " : null}
+        <span className="chars-reveal-word" aria-hidden="true">
+          {Array.from(word).map((char) => {
+            const index = characterIndex++;
+            return <motion.span key={`${char}-${index}`} initial={reduced ? false : { opacity: 0, y: ".55em", rotate: 5 }} whileInView={{ opacity: 1, y: 0, rotate: 0 }} viewport={{ once: true, amount: .7 }} transition={{ duration: reduced ? 0 : .9, delay: reduced ? 0 : index * .04, ease: [.16, 1, .3, 1] }}>{char}</motion.span>;
+          })}
+        </span>
+      </Fragment>
     ))}
   </span>;
 }
