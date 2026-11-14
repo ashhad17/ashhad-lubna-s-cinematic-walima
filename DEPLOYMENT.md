@@ -12,18 +12,17 @@ SPA, so do not configure a catch-all rewrite to `index.html` or deploy only the
 
 ## Configure the public URL
 
-Set `VITE_SITE_URL` to the site's public origin before building or deploying,
-for example `https://invitation.example.com`. This value is embedded at
-build time and is used for the canonical URL and absolute Open Graph/Twitter
-preview image URL. Without it, crawlers will not receive image or canonical URL
-metadata.
+The Render Blueprint sets `VITE_SITE_URL` to the Render service's public URL.
+If you use a custom domain or a different Render URL, update this value in
+`render.yaml` (or in the Render service's build environment) and redeploy. It is
+embedded at build time and is used for the canonical URL and absolute Open
+Graph/Twitter preview image URL.
 
 ## Deploy to Render
 
 The root `render.yaml` defines a Render Node web service using Nitro's
-`node-server` preset. In Render, create a Blueprint from this repository and
-provide `VITE_SITE_URL` when prompted. Render builds with `npm ci && npm run
-build` and starts the standalone SSR server with
+`node-server` preset. In Render, create a Blueprint from this repository.
+Render builds with `npm ci && npm run build` and starts the standalone SSR server with
 `node .output/server/index.mjs`.
 
 The Blueprint uses Render's free plan to avoid selecting a paid service without
