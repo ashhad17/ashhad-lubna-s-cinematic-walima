@@ -14,3 +14,6 @@
 - [x] Add a physical-opening interaction, touch gallery, countdown, calendar, map, and RSVP actions
 - [x] Verify phone and desktop rendering, controls, and reduced-motion behavior
 - [x] Resolve missing parallax presentation styles and restore calendar-saving controls
+- [x] Fix mobile heading clipping in animated countdown and RSVP titles
+- [x] Refine the opening cover and first portrait scene for phone screens
+- [ ] Verify the mobile opening flow and wrapped section headings
