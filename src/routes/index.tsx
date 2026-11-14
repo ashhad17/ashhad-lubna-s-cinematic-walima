@@ -8,10 +8,7 @@ const invitationTitle = `${coupleNames} — The Valima / Reception Invitation`;
 const siteUrl = import.meta.env["VITE_SITE_URL"]
   ? new URL(import.meta.env["VITE_SITE_URL"]).origin
   : "https://ashhad-lubna-wedding-invitation.onrender.com";
-const invitationCoverImage = new URL(
-  "/Green%20and%20Gold%20Elegant%20Wedding%20Invitation%20Card.png",
-  siteUrl,
-).href;
+const invitationCoverImage = new URL("/wedding-invitation-preview.jpg", siteUrl).href;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -22,6 +19,10 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: invitationDescription },
       { property: "og:url", content: siteUrl },
       { property: "og:image", content: invitationCoverImage },
+      { property: "og:image:secure_url", content: invitationCoverImage },
+      { property: "og:image:type", content: "image/jpeg" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "1692" },
       { property: "og:image:alt", content: `${coupleNames} wedding reception invitation` },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

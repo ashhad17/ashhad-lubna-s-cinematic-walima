@@ -30,54 +30,61 @@ var public_assets_data_default = {
 		"size": 174,
 		"path": "../public/robots.txt"
 	},
+	"/wedding-invitation-preview.jpg": {
+		"type": "image/jpeg",
+		"etag": "\"5a157-sKxl5SYO0qJ3BLdQuzoleCuvAIQ\"",
+		"mtime": "2026-11-14T12:21:23.437Z",
+		"size": 368983,
+		"path": "../public/wedding-invitation-preview.jpg"
+	},
 	"/assets/styles-BCXI1pnJ.css": {
 		"type": "text/css; charset=utf-8",
 		"etag": "\"1cc29-bwUI+f8A++jlNJ60zw9G3xC1jLQ\"",
-		"mtime": "2026-11-14T11:38:25.528Z",
+		"mtime": "2026-11-14T12:24:08.043Z",
 		"size": 117801,
 		"path": "../public/assets/styles-BCXI1pnJ.css"
 	},
 	"/assets/walima-attire-CSYkwYi-.jpg": {
 		"type": "image/jpeg",
 		"etag": "\"3ebc2-1Q0i/jaMkFvuUJ/2QbL8xfUmwy8\"",
-		"mtime": "2026-11-14T11:38:25.542Z",
+		"mtime": "2026-11-14T12:24:08.057Z",
 		"size": 256962,
 		"path": "../public/assets/walima-attire-CSYkwYi-.jpg"
-	},
-	"/assets/walima-rings-CqOIHnUD.jpg": {
-		"type": "image/jpeg",
-		"etag": "\"1d3ac-xBuwZd3QKnSF22XJHBnzdWuqFR4\"",
-		"mtime": "2026-11-14T11:38:25.548Z",
-		"size": 119724,
-		"path": "../public/assets/walima-rings-CqOIHnUD.jpg"
 	},
 	"/assets/walima-ballroom-BmyTzGq4.jpg": {
 		"type": "image/jpeg",
 		"etag": "\"49ad1-i2pvhQ03yhgdRn1MYFozEeGg1Kc\"",
-		"mtime": "2026-11-14T11:38:25.544Z",
+		"mtime": "2026-11-14T12:24:08.059Z",
 		"size": 301777,
 		"path": "../public/assets/walima-ballroom-BmyTzGq4.jpg"
+	},
+	"/assets/walima-rings-CqOIHnUD.jpg": {
+		"type": "image/jpeg",
+		"etag": "\"1d3ac-xBuwZd3QKnSF22XJHBnzdWuqFR4\"",
+		"mtime": "2026-11-14T12:24:08.063Z",
+		"size": 119724,
+		"path": "../public/assets/walima-rings-CqOIHnUD.jpg"
 	},
 	"/assets/walima-silhouette-C93l_3sE.jpg": {
 		"type": "image/jpeg",
 		"etag": "\"2b9f6-DNXeGv2y2I+X1LpbvhOet4r+0no\"",
-		"mtime": "2026-11-14T11:38:25.548Z",
+		"mtime": "2026-11-14T12:24:08.066Z",
 		"size": 178678,
 		"path": "../public/assets/walima-silhouette-C93l_3sE.jpg"
 	},
-	"/assets/routes-Cy4Gt76K.js": {
+	"/assets/index-BPyt_a90.js": {
 		"type": "text/javascript; charset=utf-8",
-		"etag": "\"4207e-kgy14B6pi6gvNqz9gg79HgREPxs\"",
-		"mtime": "2026-11-14T11:38:25.493Z",
-		"size": 270462,
-		"path": "../public/assets/routes-Cy4Gt76K.js"
+		"etag": "\"5aa7b-dkqp7bdhC7wKzceNZfLS57srOoI\"",
+		"mtime": "2026-11-14T12:24:07.958Z",
+		"size": 371323,
+		"path": "../public/assets/index-BPyt_a90.js"
 	},
-	"/assets/index-D2-JoSwM.js": {
+	"/assets/routes-CTOTJwyK.js": {
 		"type": "text/javascript; charset=utf-8",
-		"etag": "\"5a9de-Qe/0EfXT5xp+Z68qZCSKlZxT/bA\"",
-		"mtime": "2026-11-14T11:38:25.423Z",
-		"size": 371166,
-		"path": "../public/assets/index-D2-JoSwM.js"
+		"etag": "\"4207e-Q7rgAve+uGA6h8P7Nb6Gqz2JL9g\"",
+		"mtime": "2026-11-14T12:24:08.012Z",
+		"size": 270462,
+		"path": "../public/assets/routes-CTOTJwyK.js"
 	},
 	"/Green and Gold Elegant Wedding Invitation Card.png": {
 		"type": "image/png",
